@@ -31,7 +31,9 @@
 #pragma comment(lib, "shell32.lib")
 
 namespace {
-constexpr wchar_t kTitle[] = L"The Jockey Club Installer";
+#define TJC_WIDE_LITERAL_(value) L##value
+#define TJC_WIDE_LITERAL(value) TJC_WIDE_LITERAL_(value)
+constexpr wchar_t kTitle[] = L"The Jockey Club " TJC_WIDE_LITERAL(TJC_INSTALLER_VERSION) L" Installer";
 constexpr wchar_t kManifest[] = L"manifest.tsv";
 constexpr wchar_t kSpeed[] = L"TheJockeyClub\\learning\\TheJockeyClub-speed-learning-v4.dat";
 constexpr wchar_t kActiveJournal[] = L".TheJockeyClub-install-active.tsv";

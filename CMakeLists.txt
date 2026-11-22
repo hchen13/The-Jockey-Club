@@ -11,7 +11,7 @@ if(NOT EXISTS "${SCRIPHOOK_SDK_ROOT}/inc/types.h")
 endif()
 
 add_executable(tjc_installer WIN32 tools/release_installer.cpp tools/clubhouse/portable.manifest)
-target_compile_definitions(tjc_installer PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX UNICODE _UNICODE _WIN32_WINNT=0x0A00)
+target_compile_definitions(tjc_installer PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX UNICODE _UNICODE _WIN32_WINNT=0x0A00 "TJC_INSTALLER_VERSION=\"${PROJECT_VERSION}\"")
 target_compile_options(tjc_installer PRIVATE /W4 /EHsc /utf-8)
 target_link_libraries(tjc_installer PRIVATE Bcrypt Ole32 Shell32 User32 Uuid)
 set_target_properties(tjc_installer PROPERTIES
