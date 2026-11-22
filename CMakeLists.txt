@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(rdr2_the_jockey_club VERSION 0.32.1 LANGUAGES CXX RC)
+project(rdr2_the_jockey_club VERSION 1.18.0 LANGUAGES CXX RC)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

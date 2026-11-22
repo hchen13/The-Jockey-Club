@@ -166,7 +166,7 @@ __declspec(noinline) void InitializeScriptSession()
     horse_races::log_sink::Shared().SetFolding(LoadFloat("Telemetry","LogFold","1",0,1,1)>=.5F);
     g_sound_on = MakeCue(true);
     g_sound_off = MakeCue(false);
-    Log("The Jockey Club 0.32.1 loaded; native race BGM selections; bonding gait minimum active on sprint; "
+    Log("The Jockey Club 1.18.0 loaded; native race BGM selections; bonding gait minimum active on sprint; "
         "isolated gait probes default off");
     horse_diagnostics::MarkFaultStage("startup: native resources");
     horse_races::cues::Load(g_paths.MainConfig().string());

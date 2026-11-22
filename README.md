@@ -1,8 +1,10 @@
 # The Jockey Club
 
-A horse-racing mod for Red Dead Redemption 2 Story Mode on Windows. Ride out to challenge other riders, meet strangers on the trail, enter breed-restricted races, or watch the field as a spectator with a wager on the result. Clubhouse is the companion app for reviewing rides, comparing racing lines and managing settings.
+The Jockey Club 1.18.0 is a horse-racing mod for Red Dead Redemption 2 Story Mode on Windows. Ride out to challenge other riders, meet strangers on the trail, enter breed-restricted races, or watch the field as a spectator with a wager on the result. Clubhouse is the companion app for reviewing rides, comparing racing lines and managing settings.
 
 Player downloads will be linked here when the Nexus Mods release is available.
+
+Older archives also use version 1.18.0 for *HorseSpeedLab*, the project's earlier horse-speed plugin. The racing mod uses the filename `TheJockeyClub.asi`. The name `HorseSpeedLab.motion.v2` still appears in recordings so existing tools can read them.
 
 ## Source and player builds
 

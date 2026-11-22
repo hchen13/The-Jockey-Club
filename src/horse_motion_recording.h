@@ -387,7 +387,7 @@ struct Recorder {
             token=c.race_token;samples=0;bytes=0;started=next=now;after_result=0;
             bookmaker=bookmaker_racing;bookmaker_result_written=false;
             started_tick_ms=opening_tick_ms;
-            std::ostringstream header;header<<"{\"schema\":\"HorseSpeedLab.motion.v2\",\"build\":\"0.32.1\",\"source\":\"in-process native pre-control; explicit physics_activation before/after readback\","
+            std::ostringstream header;header<<"{\"schema\":\"HorseSpeedLab.motion.v2\",\"build\":\"1.18.0\",\"source\":\"in-process native pre-control; explicit physics_activation before/after readback\","
                 "\"sample_interval_s\":0.1,\"force_applied_semantics\":\"native command submitted, not proof of physics response\","
                 "\"bonus_state_semantics\":\"active is presentation; near_bonus_applied selects curve bonus; force_applied is submitted propulsion\","
                 "\"native_vector_observation_semantics\":\"retained request/output snapshots; recording_scope marks older snapshots; within_recording is not proof of current actuation\","

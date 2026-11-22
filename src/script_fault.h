@@ -77,7 +77,7 @@ inline LONG RecordFault(EXCEPTION_POINTERS* fault) {
     SYSTEMTIME time{};GetLocalTime(&time);
     static char message[4096]{};
     const int size=_snprintf_s(message,sizeof(message),_TRUNCATE,
-        "[%04u-%02u-%02u %02u:%02u:%02u] TheJockeyClub 0.32.1 pid=%lu thread=%lu\r\n"
+        "[%04u-%02u-%02u %02u:%02u:%02u] TheJockeyClub 1.18.0 pid=%lu thread=%lu\r\n"
         "code=0x%08lX rip=0x%016llX module=%s rva=0x%llX\r\n"
         "stage=%s rsp=0x%016llX own_native_executing=%u last_own_native=0x%016llX argc=%u\r\n"
         "args(first8)=%016llX,%016llX,%016llX,%016llX,%016llX,%016llX,%016llX,%016llX\r\n"
