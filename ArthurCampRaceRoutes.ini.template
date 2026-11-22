@@ -1,0 +1,79 @@
+; Arthur's Thoroughbred stakes race, offered at his camp - TEMPLATE. Becomes
+; ArthurCampRaceRoutes.ini in the game directory once every TODO is filled;
+; until then the station stays off the map (a file that does not parse is
+; ignored, and the log says "route config arthur-camp: rejected ...").
+;
+; Arthur is already standing in his camp: that is where the race is taken.
+; Lock on to him and the same two prompts every fixed host shows appear - the
+; paid race and the free practice - and choosing either starts this race.
+; There is no host point to survey: he and his horse are made at the start
+; line when the choice is made, which nobody sees, and the screen has faded
+; before anyone is put on the grid.
+;
+; A field race - Arthur, three to five other riders, and the player - so every
+; entrant rides a Thoroughbred and the player must bring one too. It is judged
+; in a corridor: the recorded line IS the course, and leaving it loses.
+;
+; Captures, game running, from the repository root:
+;   1. At the start line, facing the direction of travel:
+;        python tools/capture_race_point.py <pid>    -> [Point.arthur_camp_start_01]
+;        python tools/capture_race_heading.py <pid>  -> GridHeading
+;   2. At the finish:
+;        python tools/capture_race_point.py <pid>    -> [Point.arthur_camp_finish_01]
+;   3. python tools/record_player_course.py <pid>, then ride the whole thing
+;      at racing pace, start line to finish. Ctrl+C stops it; the capture
+;      lands under analysis/player-courses/. Hand it over and
+;      tools/build_segmented_circuit.py writes the [Circuit.Trip] nodes below.
+;
+; The first node of [Circuit.Trip] must be the start point and the last the
+; finish point, within a tenth of a metre - the builder sees to that.
+
+[Route]
+; One recorded line, open at both ends, judged in a corridor.
+Mode=SingleTrip
+; Arthur hosts in both chapters: the camp only exists for John, and so does this.
+Host=Arthur
+Title=Arthur's Stakes Race
+TitleZh=亚瑟的锦标赛
+StartPoint=arthur_camp_start_01
+FinishPoint=arthur_camp_finish_01
+; Thoroughbreds only, and a field to race against: Arthur rides his own blood
+; bay, the rest of the field is drawn from the breed's other coats, and the
+; player's mount is checked at the prompt.
+Breed=Thoroughbred
+FieldMin=3
+FieldMax=5
+; Jockey speed uses the host's ability band; acceleration is each horse's own.
+; A fraction of a speed level Arthur earns at full flight on a straight.
+HostSpeedLevelBonus=0.5
+; The course stays policed for the whole race, not only at the start.
+ContinuousClearance=1
+RewardMultiplier=Distance
+StakeMultiplier=Distance
+; TODO: the way the starting grid faces (a field race needs this).
+GridHeading=TODO
+
+[Point.arthur_camp_start_01]
+Name=TODO
+NameZh=TODO
+X=TODO
+Y=TODO
+Z=TODO
+
+[Point.arthur_camp_finish_01]
+Name=TODO
+NameZh=TODO
+X=TODO
+Y=TODO
+Z=TODO
+
+; The corridor: how far either side of the recorded line a rider may go, and
+; how far above or below it. SingleTrip takes these two and nothing else.
+[Circuit]
+TrackHalfWidth=12
+HeightTolerance=8
+
+; TODO: the recorded line, from tools/build_segmented_circuit.py.
+; [Circuit.Trip]
+; Node0=...
+; Node1=...

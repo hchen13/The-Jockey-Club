@@ -1,0 +1,104 @@
+; Arthur's camp at Horseshoe Overlook (epilogue). Becomes ArthurCamp.ini in
+; the game directory. tools/capture_camp_layout.py writes the two captures
+; below into a copy of this file; tools/camp_layout_from_survey.py fills
+; the whole file from a scene survey of the chapter 2 camp. Until the
+; captures are in, the camp stays down.
+;
+; Everything but the two captures is optional and hot-reloaded: edit a
+; number, save, and within two seconds the camp is struck and rebuilt with
+; it (out of the player's sight first, so step away a moment). A line that
+; does not parse rejects the whole file and the last good layout stays.
+;
+; Offsets are metres in the tent's frame: forward is out of the tent's open
+; front, right is the tent's right hand, up is up; yaw is degrees added to
+; the tent's heading (counter-clockwise positive). Every prop is dropped onto
+; the ground under its spot unless its line ends in ",float".
+
+[Camp]
+Enabled=1
+; Only while the player is John. 0 shows the camp to a playing Arthur as well.
+OnlyForJohn=1
+MapMarker=1
+; A camp, unlike a rider, does not leave: once built it stays until a
+; mission, an online session or a playing Arthur strikes it.
+; Seats (benches, crates, stools, chairs) get scenario points the player can sit on.
+PlayerSeats=1
+; Captured: the tent's centre and the direction its open front faces.
+TentX=TODO
+TentY=TODO
+TentZ=TODO
+TentHeading=TODO
+; Captured: the centre of the meadow the horses graze on.
+HorsesX=TODO
+HorsesY=TODO
+HorsesZ=TODO
+HorsesRadius=8
+; The camp is built (off camera) inside SpawnRadius; a non-persistent one is struck beyond DespawnRadius.
+SpawnRadius=220
+DespawnRadius=320
+; How long Arthur keeps one activity before drifting to another.
+ActivityMinSeconds=180
+ActivityMaxSeconds=360
+
+[Ipl]
+; The game's own map files for the chapter 2 camp, switched on while the camp
+; is up (hashes as the scripts print them, signed decimal or 0x hex). With
+; Dutch's tent comes from its map file: name it here and it stands.
+Request=
+
+[Props]
+; key=model,forward,right,up,yaw[,float][,pitch,roll]   (model "none" removes a default prop)
+; pitch and roll are world angles in degrees, given only behind the float flag: a
+; piece that leans or hangs (a map pinned to a wagon, a basin hung upside down).
+Bed=p_gangbed01x,-1.5,1.2,0,90
+Table=p_gangtablemake01x,-1.0,-1.4,0,0
+Phonograph=p_phonograph01x,-1.0,-1.4,0.78,0,float
+Rug=p_ambfloorrug03x,0,0,0,0
+Chest=p_gangcratecloth01x,-2.0,-0.2,0,0
+Fire=p_campfirecook01x,6.0,0,0,0
+Chair=p_chair09x,4.4,1.6,0,45
+Stool=p_stoolfolding01x,4.4,-1.6,0,-45
+
+[Hide]
+; key=model,x,y,z[,radius]: a map entity hidden while the camp is up, every
+; instance of the model within the radius (1 m unless said) of the world position.
+; The camp's own props are never hidden. "key=none" removes a hide. A survey
+; lists map entities as "mapobject" lines; a hide of a model that is not there
+; costs nothing, so a whole family of names may be hidden at one spot.
+
+[Interactions]
+; Locker=<prop key>  : the game's own gun locker opens at that prop (Arthur's chest).
+Locker=
+
+[Activities]
+; kind=scenario,anchor prop,forward,right,up,yaw,sitting[,conditional anim]
+; The pose is an offset in the anchor prop's own frame ("tent" anchors to the tent).
+cook=WORLD_CAMP_FIRE_COOKING,Fire,-1.0,0,0,0,0
+chair=PROP_HUMAN_SEAT_CHAIR,Chair,0,0,0,0,1
+bed=PROP_HUMAN_SLEEP_BED_PILLOW,Bed,0,0,0.6,0,1
+
+[Horses]
+; The horses graze at ease on the meadow, on the camp's own grazing scenario,
+; as the gang's did at Horseshoe Overlook.
+Scenario=WORLD_ANIMAL_HORSE_GRAZING_CAMP
+; Where each horse stands, recorded from the chapter 2 camp: world X,Y,Z,heading,
+; Spot1 for the first model and so on. A horse with no spot of its own is left out.
+; Spot1=-118.400,-2.940,95.611,4.0
+; Arthur's stable (race_host_horses.h). Up to 12, comma separated.
+Models=A_C_HORSE_HUNGARIANHALFBRED_LIVERCHESTNUT,A_C_HORSE_BUELL_WARVETS,A_C_HORSE_THOROUGHBRED_BLOODBAY,A_C_HORSE_SHIRE_RAVENBLACK,A_C_HORSE_MUSTANG_TIGERSTRIPEDBAY,A_C_HORSE_THOROUGHBRED_REVERSEDAPPLEBLACK
+
+[Mary]
+; Mary Linton lives here with him (2026-09-21). Enabled=0 sends her away; Model= is her ped.
+Enabled=1
+Model=CS_MARYLINTON
+
+[MaryActivities]
+; The [Activities] grammar: name=scenario,anchor prop,forward,right,up,yaw,sitting[,conditional anim].
+; Her seats are the ones Arthur does not use (he has FireChair2, FireCrate and the cot), so the two
+; never ask for the same one. The conditional anim picks the woman's version of a scenario.
+firechair=PROP_HUMAN_CAMP_FIRE_SEAT_BOX,FireChair,0,0,0.42,180,1,PROP_HUMAN_CAMP_FIRE_SEAT_BOX_FEMALE_A
+crate=PROP_HUMAN_CAMP_FIRE_SEAT_BOX,FireCrate2,0,0,0.42,180,1,PROP_HUMAN_CAMP_FIRE_SEAT_BOX_FEMALE_A
+; Standing: by the fire, across from where he stands; and out in front of the tent.
+fire=WORLD_HUMAN_FIRE_STAND,Fire,1.3,0.9,0,180,0,WORLD_HUMAN_FIRE_STAND_FEMALE_A
+wait=WORLD_HUMAN_STAND_WAITING,tent,3.6,-0.6,0,20,0,WORLD_HUMAN_STAND_WAITING_FEMALE_A
+notebook=WORLD_HUMAN_WRITE_NOTEBOOK,tent,4.6,-1.4,0,-20,0,WORLD_HUMAN_WRITE_NOTEBOOK_FEMALE_A

@@ -1,0 +1,4 @@
+[
+  {"name":"A", "profile":"first", "from":420, "to":535, "repeat_on_profiles":true},
+  {"name":"B", "profile":"first", "from":740, "to":875, "repeat_on_profiles":true}
+]

@@ -1,0 +1,233 @@
+<div id="rival-progress-chart">
+  <style>
+    #rival-progress-chart { position: relative; color: var(--foreground); }
+    #rival-progress-chart .race-meta {overflow-wrap:anywhere;}
+    #rival-progress-chart .race-heading { padding-right: 90px; }
+    #rival-progress-chart .race-legend { display:flex; flex-wrap:wrap; gap:8px 20px; align-items:center; margin: 8px 0; }
+    #rival-progress-chart .series-toggle { appearance:none; background:transparent; border:0; border-radius:0; padding:0; color:var(--foreground); font:inherit; display:inline-flex; align-items:center; gap:7px; }
+    #rival-progress-chart .series-toggle[aria-pressed="false"] { opacity:.45; }
+    #rival-progress-chart .series-swatch { display:inline-block; width:25px; height:0; border-top:3px solid var(--viz-series-1); }
+    #rival-progress-chart .rival-swatch { border-color:var(--viz-series-2); border-top-style:dashed; }
+    #rival-progress-chart .turn-key { display:inline-flex; gap:7px; align-items:center; flex-wrap:wrap; }
+    #rival-progress-chart .turn-gradient { width:74px; height:10px; background:linear-gradient(to right,color-mix(in srgb,var(--purple) 8%,var(--background)),var(--purple)); }
+    #rival-progress-chart .race-plot { width:100%; }
+    #rival-progress-chart .race-svg { display:block; width:100%; overflow:visible; }
+    #rival-progress-chart .race-svg text { fill:var(--foreground); font-family:inherit; font-size:12px; font-weight:400; }
+    #rival-progress-chart .race-svg .tick line,
+    #rival-progress-chart .race-svg .domain { stroke:var(--border); }
+    #rival-progress-chart .race-svg .series-line { fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
+    #rival-progress-chart .race-svg .you-line { stroke:var(--viz-series-1); }
+    #rival-progress-chart .race-svg .rival-line { stroke:var(--viz-series-2); stroke-dasharray:6 3; }
+    #rival-progress-chart .race-tip { position:absolute; pointer-events:none; background:var(--popover); color:var(--popover-foreground); border:1px solid var(--border); padding:9px 11px; max-width:260px; z-index:3; }
+    #rival-progress-chart .race-tip[hidden] { display:none; }
+    #rival-progress-chart .race-tip table { border-collapse:collapse; width:100%; }
+    #rival-progress-chart .race-tip th { text-align:left; font-weight:400; padding-right:12px; }
+    #rival-progress-chart .race-tip td { text-align:right; }
+    #rival-progress-chart .race-tip .tip-position { margin-bottom:5px; }
+    #rival-progress-chart .race-caption { margin-top:4px; color:var(--muted-foreground); }
+    @media (pointer:coarse) { #rival-progress-chart .series-toggle { min-height:44px; } }
+  </style>
+  <h3 class="race-heading">__TITLE__ · 同路段速度对比</h3>
+  <div class="race-meta text-small text-muted"></div>
+  <div class="race-legend">
+    <button class="series-toggle cursor-interaction" type="button" data-series="you" aria-pressed="true"><span class="series-swatch" aria-hidden="true"></span>你</button>
+    <button class="series-toggle cursor-interaction" type="button" data-series="rival" aria-pressed="true"><span class="series-swatch rival-swatch" aria-hidden="true"></span>__RIVAL__</button>
+    <span class="turn-key text-small">直线 <span class="turn-gradient" aria-hidden="true"></span> 急弯</span>
+  </div>
+  <div class="race-plot"></div>
+  <div class="race-caption text-small">5 m 分段实测速度 · 色带：前后各 10 m 的平面转角 · 标记：所选弯道的低速谷</div>
+  <div class="race-caption text-small">双方曲线截至比赛结算前的最后采样；末段留空，不使用赛后速度。</div>
+  <div class="tooltip race-tip text-small tabular-nums" role="tooltip" hidden></div>
+  <div class="sr-only">横轴为从起点到终点的累计赛道米数。两条线按各自通过同一位置时的速度对齐，而非同时刻。你为实线，__RIVAL__为虚线。紫色色带越浓，录制中心线在二十米窗口内的转向角越大。</div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script type="application/json" id="rival-race-data">__DATA__</script>
+  <script>
+  (() => {
+    const root = document.getElementById("rival-progress-chart");
+    const data = JSON.parse(document.getElementById("rival-race-data").textContent);
+    root.querySelector(".race-meta").textContent=data.subtitle;
+    const plot = root.querySelector(".race-plot"), tip = root.querySelector(".race-tip");
+    const series = Object.fromEntries(Object.entries(data.series).map(([key, points]) =>
+      [key, points.map(([x, y]) => ({x,y}))]));
+    const turns = data.turn.map(([x,y]) => ({x,y}));
+    const visible = {you:true, rival:true};
+    let pinnedX = null, drawHover = null, oldWidth = -1;
+    const names = data.names;
+    const fmt = d3.format(".1f");
+    const bisect = d3.bisector(d => d.x);
+    const saved = window.openai?.widgetState?.privateContent;
+    function applySaved(s) {
+      if (s && typeof s.you === "boolean") visible.you = s.you;
+      if (s && typeof s.rival === "boolean") visible.rival = s.rival;
+      if (!visible.you && !visible.rival) visible.you = visible.rival = true;
+      pinnedX = Number.isFinite(s?.position) ? Math.max(0,Math.min(data.length,s.position)) : null;
+    }
+    applySaved(saved);
+    function persist() {
+      window.openai?.setWidgetState({
+        modelContent:{race:data.source,progressMetres:pinnedX,visibleSeries:Object.keys(visible).filter(k=>visible[k])},
+        privateContent:{...visible,position:pinnedX}
+      }).catch(()=>{});
+    }
+    function interpolate(points, x) {
+      if (!points.length || x < points[0].x || x > points.at(-1).x) return null;
+      const near = bisect.center(points,x);
+      const i = points[near].x <= x ? near : near-1;
+      if (i < 0) return points[0].y;
+      if (i+1 >= points.length) return points[i].y;
+      const a=points[i],b=points[i+1];
+      if (a.y === null || b.y === null || b.x-a.x>data.binMetres*1.5) return null;
+      return a.y+(b.y-a.y)*(x-a.x)/(b.x-a.x);
+    }
+    function rgbaTurn(angle) {
+      const strength = angle === null ? 0 : .08+.92*Math.min(1,angle/turnMax);
+      return `color-mix(in srgb, var(--purple) ${strength*100}%, var(--background))`;
+    }
+    const turnMax = Math.max(10,Math.ceil(d3.max(turns,d=>d.y)/10)*10);
+    const times = [1,2].map(i=>data.timing.map(r=>({x:r[0],y:r[i]})));
+    function syncLegend() {
+      root.querySelectorAll("[data-series]").forEach(b=>b.setAttribute("aria-pressed",String(visible[b.dataset.series])));
+    }
+    function draw() {
+      syncLegend();
+      const width = plot.getBoundingClientRect().width;
+      if (width < 100) return;
+      oldWidth = width;
+      const compact=width<440, height=compact?358:420;
+      const margin={left:64,right:17,top:37,bottom:88};
+      const left=margin.left,right=width-margin.right,top=margin.top,bottom=height-margin.bottom;
+      const x=d3.scaleLinear().domain(d3.extent([0,data.length])).range([left+2,right-2]);
+      const all=Object.values(series).flat();
+      const extent=d3.extent(all,d=>d.y), span=extent[1]-extent[0];
+      const y=d3.scaleLinear().domain([Math.max(0,extent[0]-.04*span),extent[1]+.07*span]).nice().range([bottom-2,top+2]);
+      plot.replaceChildren();
+      const svg=d3.select(plot).append("svg").attr("class","race-svg")
+        .attr("viewBox",`0 0 ${width} ${height}`).attr("height",height).attr("role","img")
+        .attr("aria-label","比赛中你和__RIVAL__按累计赛道距离对齐的实际速度，横轴下方为转角色带");
+      svg.append("title").text("你与__RIVAL__：同一赛程位置的实际速度");
+      svg.append("desc").text("速度按5米赛程分段，以水平实际位移除以游戏时间计算。__RIVAL__曲线末端缺失表示玩家已经完赛，不补画。");
+      svg.append("defs").append("clipPath").attr("id","rival-speed-clip")
+        .append("rect").attr("x",left).attr("y",top).attr("width",right-left).attr("height",bottom-top);
+      svg.append("rect").attr("data-chart-frame","").attr("x",left).attr("y",top)
+        .attr("width",right-left).attr("height",bottom-top).attr("fill","none").attr("stroke","var(--border)");
+      svg.append("g").attr("transform",`translate(${left},0)`).call(d3.axisLeft(y).ticks(5).tickSize(0).tickPadding(10));
+      svg.append("g").selectAll("line").data(y.ticks(5)).join("line")
+        .attr("x1",left).attr("x2",right).attr("y1",d=>y(d)).attr("y2",d=>y(d))
+        .attr("stroke","var(--border)").attr("opacity",.5);
+      const tickCount=compact?4:8;
+      let ticks=d3.ticks(0,data.length,tickCount-1).filter(d=>d<data.length-150);
+      if (!ticks.includes(0)) ticks.unshift(0);
+      ticks.push(data.length);
+      if (compact && ticks.length>4) ticks=[0,data.length/3,2*data.length/3,data.length];
+      const axis=svg.append("g").attr("transform",`translate(0,${bottom+19})`)
+        .call(d3.axisBottom(x).tickValues(ticks).tickFormat(v=>Math.round(v).toLocaleString()).tickSize(4).tickPadding(7));
+      axis.selectAll(".tick text").attr("text-anchor",d=>d===0?"start":d===data.length?"end":"middle");
+      svg.append("text").attr("class","axis-title").attr("data-axis","y")
+        .attr("x",left).attr("y",14).text("速度（km/h）");
+      svg.append("text").attr("class","axis-title").attr("data-axis","x")
+        .attr("x",(left+right)/2).attr("y",height-15).attr("text-anchor","middle").text("赛程进度（m）");
+      const band=svg.append("g").attr("aria-label",`转角色带，0至${turnMax}度，前后各10米`);
+      band.selectAll("rect").data(turns).join("rect")
+        .attr("x",d=>x(Math.max(0,d.x-data.binMetres/2)))
+        .attr("width",d=>Math.max(.2,x(Math.min(data.length,d.x+data.binMetres/2))-x(Math.max(0,d.x-data.binMetres/2))+.2))
+        .attr("y",bottom+2).attr("height",13).attr("fill",d=>rgbaTurn(d.y));
+      data.laps.slice(1,-1).forEach(s=>{
+        svg.append("line").attr("x1",x(s)).attr("x2",x(s)).attr("y1",top).attr("y2",bottom+15)
+          .attr("stroke","var(--foreground)").attr("opacity",.27).attr("stroke-dasharray","3 4");
+      });
+      data.laps.slice(0,-1).forEach((s,i)=>{
+        svg.append("text").attr("x",x((s+data.laps[i+1])/2)).attr("y",top-9)
+          .attr("text-anchor","middle").text(`第 ${i+1} 圈`);
+      });
+      const curves=svg.append("g").attr("clip-path","url(#rival-speed-clip)");
+      const line=d3.line().defined(d=>d.y!==null).x(d=>x(d.x)).y(d=>y(d.y)).curve(d3.curveLinear);
+      for (const key of Object.keys(series)) {
+        if (!visible[key]) continue;
+        curves.append("path").datum(series[key]).attr("class",`series-line ${key}-line`).attr("d",line);
+      }
+      if (visible.rival) {
+        const notes=curves.append("g").attr("class","low-speed-notes");
+        for (const note of data.annotations) {
+          notes.append("circle").attr("cx",x(note.x)).attr("cy",y(note.y)).attr("r",2.6)
+            .attr("fill","var(--viz-series-2)");
+          notes.append("text").attr("class","optional-note").attr("x",x(note.x))
+            .attr("y",Math.min(bottom-9,y(note.y)+19)).attr("text-anchor","middle").text(note.label);
+        }
+      }
+      const hover=svg.append("g").attr("pointer-events","none").attr("display","none");
+      const guide=hover.append("line").attr("data-chart-hover-guide","").attr("y1",top).attr("y2",bottom+15)
+        .attr("stroke","var(--foreground)").attr("opacity",.55);
+      const markers=Object.fromEntries(Object.keys(series).map(key=>[key,hover.append("circle")
+        .attr("data-chart-hover-marker",key).attr("r",3.6)
+        .attr("fill",key==="you"?"var(--viz-series-1)":"var(--viz-series-2)")
+        .attr("stroke","var(--background)").attr("stroke-width",1.3)]));
+      drawHover = s => {
+        if (s===null) { hover.attr("display","none");tip.hidden=true;return; }
+        const px=x(s);
+        hover.attr("display",null);guide.attr("x1",px).attr("x2",px);
+        const v={};
+        Object.keys(series).forEach(key=>{
+          v[key]=interpolate(series[key],s);
+          markers[key].attr("display",visible[key]&&v[key]!==null?null:"none")
+            .attr("cx",px).attr("cy",v[key]!==null?y(v[key]):top);
+        });
+        const lap=Math.max(1,Math.min(data.laps.length-1,d3.bisectRight(data.laps,s)));
+        const turn=interpolate(turns,s), ta=interpolate(times[1],s), tp=interpolate(times[0],s);
+        let content=`<div class="tip-position">${Math.round(s).toLocaleString()} m · ${fmt(s/data.length*100)}% · 第 ${lap} 圈</div><table>`;
+        for (const key of Object.keys(series)) if (visible[key])
+          content+=`<tr data-tooltip-series="${key}"><th>${names[key]}</th><td>${v[key]===null?"无比赛中数据":fmt(v[key])+" km/h"}</td></tr>`;
+        if (visible.you&&visible.rival&&v.you!==null&&v.rival!==null) {
+          const delta=v.rival-v.you;
+          content+=`<tr><th>__RIVAL__速度差</th><td>${delta>=0?"+":""}${fmt(delta)} km/h</td></tr>`;
+        }
+        content+=`<tr><th>20 m 转角</th><td>${turn===null?"边界未计算":fmt(turn)+"°"}</td></tr></table>`;
+        if (visible.you&&visible.rival&&tp!==null&&ta!==null) {
+          const delta=ta-tp;
+          content+=`<div>__RIVAL__到此${delta>=0?"晚":"早"} ${fmt(Math.abs(delta))} s</div>`;
+        }
+        tip.innerHTML=content;tip.hidden=false;
+        const rootBox=root.getBoundingClientRect(), plotBox=plot.getBoundingClientRect();
+        const tw=tip.getBoundingClientRect().width;
+        tip.style.left=`${Math.max(0,Math.min(width-tw,px+(px>width*.58?-tw-13:13)))}px`;
+        tip.style.top=`${plotBox.top-rootBox.top+top+6}px`;
+      };
+      svg.append("rect").attr("data-chart-hit","").attr("data-chart-hover-overlay","cross-series")
+        .attr("x",left).attr("y",top).attr("width",right-left).attr("height",bottom-top+15)
+        .attr("fill","transparent").attr("class","cursor-interaction")
+        .on("pointermove",event=>{if (pinnedX===null) drawHover(Math.max(0,Math.min(data.length,x.invert(d3.pointer(event)[0]))));})
+        .on("pointerleave",()=>{if(pinnedX===null)drawHover(null);})
+        .on("click",event=>{
+          const selected=Math.max(0,Math.min(data.length,x.invert(d3.pointer(event)[0])));
+          pinnedX=pinnedX!==null&&Math.abs(pinnedX-selected)<data.length*.015?null:selected;
+          drawHover(pinnedX);persist();
+        });
+      drawHover(pinnedX);
+      requestAnimationFrame(()=>{
+        const labels=[...svg.node().querySelectorAll(".tick text,.axis-title,.optional-note")];
+        const seen=[];
+        for (const label of labels) {
+          const b=label.getBoundingClientRect();
+          if (label.classList.contains("optional-note") && seen.some(a=>b.left<a.right+4&&b.right>a.left-4&&b.top<a.bottom+4&&b.bottom>a.top-4)) {
+            label.remove();continue;
+          }
+          seen.push(b);
+        }
+        root.dataset.chartReady="true";
+      });
+    }
+    root.querySelectorAll("[data-series]").forEach(button=>button.addEventListener("click",()=>{
+      const key=button.dataset.series;
+      if (visible[key] && Object.values(visible).filter(Boolean).length===1) return;
+      visible[key]=!visible[key];draw();persist();
+    }));
+    window.addEventListener("openai:set_globals",event=>{
+      const s=event.detail?.globals?.widgetState?.privateContent;
+      if (s) { applySaved(s);draw(); }
+    });
+    new ResizeObserver(entries=>{
+      if(Math.abs(entries[0].contentRect.width-oldWidth)>.5) draw();
+    }).observe(plot);
+    draw();
+  })();
+  </script>
+</div>

@@ -1,0 +1,296 @@
+<div id="race-survey">
+  <style>
+    #race-survey{position:relative;color:var(--foreground)}
+    #race-survey h3{padding-right:90px}
+    #race-survey .legend{display:flex;gap:6px 18px;flex-wrap:wrap;margin:10px 0}
+    #race-survey .legend button{appearance:none;background:transparent;border:0;border-radius:0;color:var(--foreground);padding:3px 0;font:inherit;display:inline-flex;align-items:center;gap:6px}
+    #race-survey .legend button[aria-pressed="false"]{opacity:.4}
+    #race-survey .legend button[hidden]{display:none}
+    #race-survey .swatch{display:inline-block;width:24px;border-top:3px solid var(--foreground)}
+    #race-survey .swatch.full{border-color:var(--muted-foreground);border-top-width:8px;opacity:.35}
+    #race-survey .swatch.walk{border-color:var(--viz-series-1)}
+    #race-survey .swatch.unknown{border-color:var(--viz-series-3);border-top-style:dashed}
+    #race-survey .swatch.raw{border-color:var(--viz-series-5);border-top-width:1px}
+    #race-survey .swatch.plan{border-color:var(--viz-series-2);border-top-style:dashed}
+    #race-survey .swatch.computed{border-color:var(--viz-series-2)}
+    #race-survey .swatch.estimated{border-color:var(--viz-series-6);border-top-style:dashed}
+    #race-survey .swatch.fallback{border-color:var(--viz-series-3);border-top-style:dashed}
+    #race-survey section{margin-top:24px;min-width:0}
+    #race-survey .panel-title{display:flex;gap:8px 20px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+    #race-survey .panel-title h3{padding:0;margin:0}
+    #race-survey .chart{display:block;width:100%;touch-action:none}
+    #race-survey .chart text{fill:var(--foreground);font-family:inherit;font-size:12px;font-weight:400}
+    #race-survey .chart .domain,#race-survey .chart .tick line{stroke:var(--border)}
+    #race-survey .chart path{stroke-linejoin:round;stroke-linecap:round}
+    #race-survey .tip{position:absolute;pointer-events:none;z-index:4;background:var(--popover);color:var(--popover-foreground);border:1px solid var(--border);padding:8px 10px;max-width:290px}
+    #race-survey .tip[hidden]{display:none}
+    #race-survey .readout{margin:4px 0;min-height:1.5em}
+    @media(pointer:coarse){#race-survey .legend button{min-height:44px}}
+  </style>
+  <h3 class="report-title">__TITLE__ · 赛道勘探边界</h3>
+  <div class="snapshot-label text-small text-muted">本场结束后的勘探缓存；不是开赛瞬间的规划输入</div>
+  <div class="text-small tabular-nums"><span class="dimensions"></span></div>
+  <div class="legend text-small" aria-label="图层">
+    <button type="button" class="cursor-interaction" data-layer="full" aria-pressed="true"><span class="swatch full"></span>完整走廊</button>
+    <button type="button" class="cursor-interaction" data-layer="walk" aria-pressed="true"><span class="swatch walk"></span>勘探净空范围</button>
+    <button type="button" class="cursor-interaction" data-layer="unknown" aria-pressed="true"><span class="swatch unknown"></span>未认证截面</button>
+    <button type="button" class="cursor-interaction" data-layer="raw" aria-pressed="false"><span class="swatch raw"></span>原始勘探截面</button>
+    <button type="button" class="cursor-interaction" data-layer="plan" aria-pressed="false"><span class="swatch plan"></span>本场 __RIVAL__ 下发线</button>
+    <button type="button" class="cursor-interaction" data-layer="computed" aria-pressed="true" hidden><span class="swatch computed"></span>当前算法规划线</button>
+    <button type="button" class="cursor-interaction" data-layer="estimated" aria-pressed="true" hidden><span class="swatch estimated"></span>临时估算（不写入勘探）</button>
+    <button type="button" class="cursor-interaction" data-layer="fallback" aria-pressed="false" hidden><span class="swatch fallback"></span>最终保留录制线段</button>
+  </div>
+  <div class="layer-caption text-small text-muted">横线：截面范围 · 色带：已测连接 · 滚轮缩放 / 拖动 / 双击全图</div>
+  <div class="panels"></div>
+  <div class="tip tooltip text-small tabular-nums" role="tooltip" hidden></div>
+  <div class="sr-only">三个等比例赛道平面图。悬停或点击赛道显示从该圈起点开始的进程，单位米。同一常规圈的不同缓存段分别保留。未知范围不当作障碍；下发路线的缺口表示没有记录到节点。</div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script type="application/json" id="tb-profile-data">__DATA__</script>
+  <script>
+  (()=>{
+    const root=document.getElementById('race-survey');
+    const data=JSON.parse(document.getElementById('tb-profile-data').textContent);
+    const usable=data.profiles.some(p=>p.observations.some(o=>o.rows.some(r=>r.usable_strips!==undefined)));
+    const visible={full:true,walk:true,unknown:!usable,raw:false,plan:false,computed:!!data.planning,estimated:!!(data.planning?.estimated_rows||data.planning?.estimated_links),fallback:false};
+    if(data.planning){
+      root.querySelector('.report-title').textContent=data.title+' · 勘探边界与规划走线';
+      root.querySelector('.snapshot-label').textContent='赛后勘探缓存 · 当前生产算法离线重算 · 灰细线为录制路线';
+      root.querySelector('[data-layer="computed"]').hidden=false;
+      root.querySelector('[data-layer="estimated"]').hidden=!visible.estimated;
+      root.querySelector('[data-layer="fallback"]').hidden=!data.profiles.some(p=>p.observations.some(o=>o.recordedPlan?.length));
+    }
+    if(usable){
+      root.querySelector('[data-layer="walk"]').lastChild.textContent='实测可利用通道';
+      root.querySelector('[data-layer="estimated"]').lastChild.textContent='估算可利用通道';
+      root.querySelector('.layer-caption').textContent='色带为导出的可利用通道 · 规划线为实际输出折线 · 滚轮缩放 / 拖动 / 双击全图';
+    }
+    if(data.survey_source==='native-profile-bank'){
+      const caches=data.profile_caches||[],native=caches.filter(p=>p.native_loaded).length;
+      const physical=caches.some(p=>p.evidence_loaded&&p.physical_rows>0);
+      root.querySelector('.report-title').textContent=data.title+' · 原生通道与规划走线';
+      root.querySelector('.snapshot-label').textContent=`原生几何基底 ${native}/${caches.length} 圈型 · ${physical?'已叠加实际物理修正':'暂无实际物理修正'} · 当前生产算法离线计算，非历史开赛快照`;
+      root.querySelector('[data-layer="walk"]').lastChild.textContent='可利用通道';
+      root.querySelector('[data-layer="raw"]').lastChild.textContent='通道截面';
+    }
+    if(data.observed_targets===false)root.querySelector('[data-layer="plan"]').hidden=true;
+    const observations=Object.fromEntries(data.profiles.map(p=>[p.id,p.observations[0].lap]));
+    root.querySelector(".dimensions").textContent=`完整宽度 ${data.parameters.half_width*2} m · 障碍额外净空 ${data.parameters.obstacle_clearance} m`;
+    const tip=root.querySelector('.tip');const redraw=[];
+    let selected=null,persistTimer=null;
+    const names={first:'首圈',regular:'常规圈',final:'末圈',course:'赛道'};
+    function restore(state){
+      if(state?.source!==data.source)return;
+      for(const key of Object.keys(visible))if(typeof state.visible?.[key]==='boolean')visible[key]=state.visible[key];
+      if(data.profiles.find(p=>p.id==='regular')?.observations.some(o=>o.lap===state.regularLap))observations.regular=state.regularLap;
+    }
+    restore(window.openai?.widgetState?.privateContent);
+    function sync(){root.querySelectorAll('[data-layer]').forEach(b=>b.setAttribute('aria-pressed',String(visible[b.dataset.layer])))}
+    function persist(){
+      window.openai?.setWidgetState({modelContent:{race:data.source,survey:'post-race',planning:data.planning?'offline-replan':undefined,...selected,visibleLayers:Object.keys(visible).filter(k=>visible[k])},privateContent:{source:data.source,visible:{...visible},regularLap:observations.regular}}).catch(()=>{});
+    }
+    function laterPersist(){clearTimeout(persistTimer);persistTimer=setTimeout(persist,350)}
+    const clipped=(spans,width)=>spans.map(p=>[Math.max(-width,p[0]),Math.min(width,p[1])]).filter(p=>p[0]<=p[1]);
+    const intersect=(a,b)=>a.flatMap(x=>b.map(y=>[Math.max(x[0],y[0]),Math.min(x[1],y[1])])).filter(p=>p[0]<=p[1]);
+    function spanText(spans){return spans.length?spans.map(p=>`${p[0].toFixed(2)} ～ ${p[1].toFixed(2)}`).join('；')+' m':'无可用区间'}
+    function plannedPoint(points,s){
+      if(!points?.length||s<points[0][0]||s>points.at(-1)[0])return null;
+      const i=Math.max(0,Math.min(points.length-2,d3.bisector(p=>p[0]).right(points,s)-1));
+      const a=points[i],b=points[i+1],f=(s-a[0])/(b[0]-a[0]);
+      return a.map((v,j)=>v+f*(b[j]-v));
+    }
+    function nearest(path,point){
+      let best=null;
+      for(let i=0;i+1<path.length;i++){
+        const a=path[i],b=path[i+1],dx=b[1]-a[1],dy=b[2]-a[2],n=dx*dx+dy*dy;
+        const t=n>0?Math.max(0,Math.min(1,((point[0]-a[1])*dx+(point[1]-a[2])*dy)/n)):0;
+        const q=[a[1]+t*dx,a[2]+t*dy],distance=Math.hypot(q[0]-point[0],q[1]-point[1]);
+        if(best&&distance>=best.distance)continue;
+        best={s:a[0]+t*(b[0]-a[0]),point:q,distance,normal:[-dy/Math.sqrt(n),dx/Math.sqrt(n)]};
+      }
+      return best;
+    }
+    for(const profile of data.profiles){
+      const section=d3.select(root.querySelector('.panels')).append('section').attr('data-profile',profile.id);
+      const heading=section.append('div').attr('class','panel-title');heading.append('h3').text(names[profile.id]);
+      heading.append('span').attr('class','text-small tabular-nums').text(`${profile.length.toFixed(1)} m · 起点为 0 m`);
+      let picker=null;
+      if(profile.observations.length>1){
+        const label=heading.append('label').attr('class','form-label text-small').text('缓存圈次 ');
+        picker=label.append('select').attr('class','form-select').attr('aria-label','常规圈缓存圈次');
+        picker.selectAll('option').data(profile.observations).join('option').attr('value',d=>d.lap).text(d=>`第 ${d.lap} 圈`);
+        picker.property('value',observations[profile.id]);
+        picker.on('change',function(){observations[profile.id]=+this.value;tip.hidden=true;draw();persist()});
+      }
+      const readout=section.append('div').attr('class','readout text-small tabular-nums').text('本圈进程：— m');
+      const plot=section.append('div').node();let transform=d3.zoomIdentity,pinned=false;
+      function draw(){
+        const obs=profile.observations.find(o=>o.lap===observations[profile.id]);
+        const width=plot.getBoundingClientRect().width, m={l:64,r:16,t:20,b:52};
+        const height=Math.max(300,Math.min(520,width*.72)), iw=width-m.l-m.r,ih=height-m.t-m.b;
+        const extX=d3.extent(profile.path,p=>p[1]),extY=d3.extent(profile.path,p=>p[2]);
+        const scale=Math.min(iw/(extX[1]-extX[0]+32),ih/(extY[1]-extY[0]+32));
+        const midX=(extX[0]+extX[1])/2,midY=(extY[0]+extY[1])/2;
+        const x=d3.scaleLinear().domain([midX-iw/(2*scale),midX+iw/(2*scale)]).range([m.l,width-m.r]);
+        const y=d3.scaleLinear().domain([midY-ih/(2*scale),midY+ih/(2*scale)]).range([height-m.b,m.t]);
+        d3.select(plot).selectAll('*').remove();
+        const svg=d3.select(plot).append('svg').attr('class','chart').attr('width',width).attr('height',height).attr('viewBox',`0 0 ${width} ${height}`)
+          .attr('role','img').attr('aria-label',`${names[profile.id]}，相对该圈起点的米数与三类边界`);
+        svg.append('title').text(`${names[profile.id]} · 第${obs.lap}圈缓存段`);
+        const clip=`tb-clip-${profile.id}`;
+        svg.append('defs').append('clipPath').attr('id',clip).append('rect').attr('x',m.l).attr('y',m.t).attr('width',iw).attr('height',ih);
+        svg.append('rect').attr('data-chart-frame','').attr('x',m.l).attr('y',m.t).attr('width',iw).attr('height',ih).attr('fill','none').attr('stroke','var(--border)');
+        const content=svg.append('g').attr('clip-path',`url(#${clip})`),g=content.append('g');
+        const line=d3.line().x(p=>x(p[0])).y(p=>y(p[1]));
+        const centre=profile.path.map(p=>p.slice(1,3));
+        const corridorMask=`tb-margin-mask-${profile.id}`;
+        svg.select('defs').append('mask').attr('id',corridorMask).attr('maskUnits','userSpaceOnUse')
+          .attr('x',-width).attr('y',-height).attr('width',width*3).attr('height',height*3).style('mask-type','alpha')
+          .append('path').attr('data-margin-mask','').attr('d',line(centre)).attr('fill','none').attr('stroke','var(--foreground)')
+          .attr('stroke-width',data.parameters.usable_half_width*2*scale).attr('stroke-linecap','round').attr('stroke-linejoin','round');
+        if(visible.full)g.append('path').attr('d',line(centre)).attr('fill','none').attr('stroke','var(--muted-foreground)').attr('stroke-width',data.parameters.half_width*2*scale).attr('opacity',.25);
+        const at=(r,l)=>[r.x+r.nx*l,r.y+r.ny*l];
+        const stripEdge=(a,b,lo,hi)=>Array.from({length:17},(_,i)=>{
+          const t=i/16,l=lo+t*(hi-lo);
+          return [a.x+t*(b.x-a.x)+l*(a.nx+t*(b.nx-a.nx)),a.y+t*(b.y-a.y)+l*(a.ny+t*(b.ny-a.ny))];
+        });
+        const usableGroup=g.append('g').attr('data-usable-mask','').attr('mask',`url(#${corridorMask})`);
+        const segment=(r,span,color,thick,dash,target=g)=>target.append('path').attr('d',line([at(r,span[0]),at(r,span[1])])).attr('fill','none')
+          .attr('stroke',color).attr('stroke-width',thick).attr('stroke-dasharray',dash||null).attr('vector-effect','non-scaling-stroke');
+        if(usable)for(let k=1;k<obs.rows.length;k++){
+          const a=obs.rows[k-1],b=obs.rows[k];if(b.index!==a.index+1)continue;
+          const estimated=b.estimated,color=estimated?'var(--viz-series-6)':'var(--viz-series-1)';
+          if(!(estimated?visible.estimated:visible.walk))continue;
+          for(const span of b.usable_strips||[]){
+            const lower=stripEdge(a,b,span[0],span[2]),upper=stripEdge(a,b,span[1],span[3]);
+            const poly=[...lower,...upper.toReversed()];
+            usableGroup.append('path').attr('data-usable-strip','').attr(estimated?'data-estimated-strip':'data-measured-strip','')
+              .attr('d',line(poly)+'Z').attr('fill',color).attr('opacity',.30);
+            for(const edge of [lower,upper])
+              usableGroup.append('path').attr('d',line(edge)).attr('fill','none').attr('stroke',color).attr('stroke-width',1.15)
+                .attr('stroke-dasharray',estimated?'3 2':null).attr('vector-effect','non-scaling-stroke');
+          }
+        }
+        if(!usable&&visible.walk)for(let k=1;k<obs.rows.length;k++){
+          const a=obs.rows[k-1],b=obs.rows[k];if(b.index!==a.index+1)continue;
+          // Incoming capsule evidence alone cannot certify an unmeasured end.
+          for(const span of intersect(intersect(b.link,a.walk),b.walk)){
+            const poly=[at(a,span[0]),at(a,span[1]),at(b,span[1]),at(b,span[0])];
+            g.append('path').attr('d',line(poly)+'Z').attr('fill','var(--viz-series-1)').attr('opacity',.22);
+          }
+        }
+        if(!usable&&visible.estimated)for(let k=1;k<obs.rows.length;k++){
+          const a=obs.rows[k-1],b=obs.rows[k];if(b.index!==a.index+1||!b.estimate_link?.length)continue;
+          const strips=b.estimate_strips||intersect(intersect(b.estimate_link,a.estimate_walk?.length?a.estimate_walk:a.walk),b.estimate_walk?.length?b.estimate_walk:b.walk).map(s=>[...s,...s]);
+          for(const span of strips){
+            const poly=[...stripEdge(a,b,span[0],span[2]),...stripEdge(a,b,span[1],span[3]).toReversed()];
+            g.append('path').attr('data-estimated-strip','').attr('d',line(poly)+'Z').attr('fill','var(--viz-series-6)').attr('opacity',.32);
+          }
+        }
+        for(const r of obs.rows){
+          if(visible.unknown)for(const span of clipped(r.unknown,data.parameters.half_width))segment(r,span,'var(--viz-series-3)',1.15,'2 2');
+          if(visible.raw)for(const span of clipped(r.raw,data.parameters.half_width))segment(r,span,'var(--viz-series-5)',1,null);
+          if(usable){
+            if(r.estimated?visible.estimated:visible.walk)for(const span of r.usable||[])
+              segment(r,span,r.estimated?'var(--viz-series-6)':'var(--viz-series-1)',.7,r.estimated?'2 2':null,usableGroup);
+          }else{
+            if(visible.walk)for(const span of r.walk)segment(r,span,'var(--viz-series-1)',1.7,null);
+            if(visible.estimated)for(const span of r.estimate_walk||[])segment(r,span,'var(--viz-series-6)',1.7,'2 2');
+          }
+        }
+        g.append('path').attr('data-recorded-centre','').attr('d',line(centre)).attr('fill','none').attr('stroke','var(--muted-foreground)').attr('stroke-width',.8).attr('vector-effect','non-scaling-stroke');
+        if(visible.plan)for(const chunk of obs.plan)g.append('path').attr('d',line(chunk.map(p=>p.slice(1,3)))).attr('fill','none').attr('stroke','var(--viz-series-2)').attr('stroke-width',1.7).attr('stroke-dasharray','4 2').attr('vector-effect','non-scaling-stroke');
+        if(visible.computed&&obs.computedPlan)g.append('path').attr('data-computed-plan','').attr('d',line(obs.computedPlan.map(p=>p.slice(1,3))))
+          .attr('fill','none').attr('stroke','var(--viz-series-2)').attr('stroke-width',2.2).attr('vector-effect','non-scaling-stroke');
+        if(visible.fallback)for(const chunk of obs.recordedPlan||[])g.append('path').attr('data-recorded-plan','')
+          .attr('d',line(chunk.map(p=>p.slice(1,3)))).attr('fill','none').attr('stroke','var(--viz-series-3)')
+          .attr('stroke-width',3).attr('stroke-dasharray','5 2').attr('vector-effect','non-scaling-stroke');
+        const endpoints=[{p:profile.path[0],label:'起点 0 m'},{p:profile.path.at(-1),label:`终点 ${profile.length.toFixed(1)} m`}];
+        const labels=content.append('g');
+        const dots=labels.selectAll('circle').data(endpoints).join('circle').attr('r',3).attr('fill','var(--foreground)');
+        const endpointText=labels.selectAll('text').data(endpoints).join('text');
+        const gx=svg.append('g').attr('transform',`translate(0,${height-m.b})`),gy=svg.append('g').attr('transform',`translate(${m.l},0)`);
+        svg.append('text').attr('class','axis-title').attr('data-axis','x').attr('x',m.l+iw/2).attr('y',height-9).attr('text-anchor','middle').text('世界 X（m）');
+        svg.append('text').attr('class','axis-title').attr('data-axis','y').attr('transform',`translate(15,${m.t+ih/2}) rotate(-90)`).attr('text-anchor','middle').text('世界 Y（m）');
+        const hover=content.append('g').attr('pointer-events','none').style('display','none');
+        const guide=hover.append('line').attr('data-chart-hover-guide','').attr('stroke','var(--foreground)').attr('stroke-width',1).attr('opacity',.7);
+        const dot=hover.append('circle').attr('data-chart-hover-marker','').attr('r',4).attr('fill','var(--foreground)');
+        const planDot=hover.append('circle').attr('data-planned-hover-marker','').attr('r',3.5).attr('fill','var(--viz-series-2)').style('display','none');
+        function update(t){
+          transform=t;g.attr('transform',t);
+          const xx=t.rescaleX(x),yy=t.rescaleY(y);
+          gx.call(d3.axisBottom(xx).ticks(width<440?3:6).tickFormat(d3.format('.0f')));
+          gy.call(d3.axisLeft(yy).ticks(height<400?4:6).tickFormat(d3.format('.0f')));
+          dots.attr('cx',d=>xx(d.p[1])).attr('cy',d=>yy(d.p[2]));
+          endpointText.attr('x',d=>xx(d.p[1])+7).attr('y',(d,i)=>yy(d.p[2])+(i?18:-9)).text(d=>d.label);
+          // Optional endpoint labels are removed at overlaps or at the frame
+          // edge; axis text is never squeezed to fit.
+          endpointText.style('display',null);
+          const prior=[];endpointText.each(function(){const b=this.getBBox();if(b.x<m.l+4||b.x+b.width>width-m.r-4||b.y<m.t+4||b.y+b.height>height-m.b-4||prior.some(a=>!(b.x>a.x+a.width+4||a.x>b.x+b.width+4||b.y>a.y+a.height+4||a.y>b.y+b.height+4))){this.style.display='none'}else prior.push(b)});
+          hover.style('display','none');tip.hidden=true;
+        }
+        const overlay=svg.append('rect').attr('data-chart-hit','').attr('data-chart-hover-overlay','cross-series').attr('x',m.l).attr('y',m.t).attr('width',iw).attr('height',ih).attr('fill','transparent');
+        const zoom=d3.zoom().scaleExtent([1,16]).extent([[m.l,m.t],[width-m.r,height-m.b]]).on('zoom',event=>update(event.transform));
+        overlay.call(zoom).on('dblclick.zoom',event=>{event.preventDefault();overlay.call(zoom.transform,d3.zoomIdentity)});
+        overlay.call(zoom.transform,transform);
+        function show(event){
+          const [px,py]=d3.pointer(event,svg.node()),xx=transform.rescaleX(x),yy=transform.rescaleY(y);
+          const pick=nearest(profile.path,[xx.invert(px),yy.invert(py)]);if(!pick)return;
+          const distancePixels=pick.distance*scale*transform.k;
+          if(distancePixels>Math.max(24,8*scale*transform.k)){hover.style('display','none');tip.hidden=true;return}
+          const r=obs.rows[d3.bisector(d=>d.s).center(obs.rows,pick.s)];
+          hover.style('display',null);
+          const a=[pick.point[0]-pick.normal[0]*data.parameters.half_width,pick.point[1]-pick.normal[1]*data.parameters.half_width],b=[pick.point[0]+pick.normal[0]*data.parameters.half_width,pick.point[1]+pick.normal[1]*data.parameters.half_width];
+          guide.attr('x1',xx(a[0])).attr('y1',yy(a[1])).attr('x2',xx(b[0])).attr('y2',yy(b[1]));
+          dot.attr('cx',xx(pick.point[0])).attr('cy',yy(pick.point[1]));
+          readout.text(`本圈进程：${pick.s.toFixed(1)} m / ${profile.length.toFixed(1)} m`);
+          const rows=[`${names[profile.id]} · 第 ${obs.lap} 圈缓存段`,`本圈进程：${pick.s.toFixed(1)} 米`];
+          const planned=visible.computed?plannedPoint(obs.computedPlan,pick.s):null;
+          planDot.style('display',planned?null:'none');
+          if(planned){
+            planDot.attr('cx',xx(planned[1])).attr('cy',yy(planned[2]));
+            rows.push(`规划节点侧移：${planned[4]>=0?'左':'右'} ${Math.abs(planned[4]).toFixed(2)} m`);
+          }
+          const ri=obs.rows.indexOf(r),previous=ri>0?obs.rows[ri-1]:null;
+          const usableLink=previous&&r.index===previous.index+1?intersect(intersect(r.link,previous.walk),r.walk):[];
+          if(usable){
+            if(r.estimated?visible.estimated:visible.walk)rows.push(`${r.estimated?'含估算':'实测'}截面边界（${r.s.toFixed(1)} m）：${spanText(r.usable||[])}`);
+            const end=d3.bisector(d=>d.s).left(obs.rows,pick.s),left=obs.rows[end-1],right=obs.rows[end];
+            if(left&&right&&right.index===left.index+1&&right.usable_strips?.length&&(right.estimated?visible.estimated:visible.walk)){
+              const t=(pick.s-left.s)/(right.s-left.s),norm=Math.hypot(left.nx+t*(right.nx-left.nx),left.ny+t*(right.ny-left.ny));
+              rows.push(`此处横截面边界：${spanText(right.usable_strips.map(s=>[(s[0]+t*(s[2]-s[0]))*norm,(s[1]+t*(s[3]-s[1]))*norm]))}`);
+            }
+            rows.push(`另受距录制折线 ${data.parameters.usable_half_width.toFixed(2)} m 的导出走廊约束；色带显示两者交集，截面侧移不等于距折线距离`);
+            if(obs.computedPlan)rows.push((obs.recordedPlan||[]).some(chunk=>pick.s>=chunk[0][0]&&pick.s<=chunk.at(-1)[0])?
+              '最终处理：保留录制线段，不代表净空认证':'最终处理：生产算法规划段');
+          }else{
+            if(visible.walk)rows.push(`净空截面：${spanText(r.walk)}`,`两端可接的入段连接：${spanText(usableLink)}`);
+            if(visible.estimated&&r.estimate_walk?.length)rows.push(`临时估算截面：${spanText(r.estimate_walk)}`);
+            if(visible.estimated&&r.estimate_link?.length)rows.push(`临时估算入段：${spanText(r.estimate_link)}`);
+          }
+          if(visible.raw)rows.push(`原始截面：${spanText(clipped(r.raw,data.parameters.half_width))}`);
+          if(visible.unknown){const spans=clipped(r.unknown,data.parameters.half_width);rows.push(`未认证：${spans.length?spanText(spans):'该截面未标记'}`);}
+          rows.push(`最近网格截面：${r.s.toFixed(1)} m · ${r.detailed?'详细观测':r.legacy?'旧观测':'未观测'}`);
+          tip.replaceChildren(...rows.map(t=>{const e=document.createElement('div');e.textContent=t;return e}));tip.hidden=false;
+          const rect=root.getBoundingClientRect(),box=tip.getBoundingClientRect();
+          tip.style.left=`${Math.max(0,Math.min(event.clientX-rect.left+14,rect.width-box.width-2))}px`;
+          tip.style.top=`${Math.max(0,event.clientY-rect.top-box.height-12)}px`;
+          selected={profile:profile.id,observedLap:obs.lap,progressMetres:+pick.s.toFixed(1)};laterPersist();
+        }
+        overlay.on('pointermove.hover',event=>{if(!pinned&&!event.buttons)show(event)}).on('pointerleave.hover',()=>{if(!pinned){hover.style('display','none');tip.hidden=true}})
+          .on('click.hover',event=>{pinned=!pinned;show(event);persist()});
+      }
+      redraw.push(()=>{if(picker)picker.property('value',observations[profile.id]);draw()});
+      const observer=new ResizeObserver(()=>{transform=d3.zoomIdentity;draw()});observer.observe(plot);
+    }
+    root.querySelectorAll('[data-layer]').forEach(b=>b.addEventListener('click',()=>{visible[b.dataset.layer]=!visible[b.dataset.layer];sync();redraw.forEach(fn=>fn());persist()}));
+    window.addEventListener('openai:set_globals',event=>{
+      const state=event.detail?.globals?.widgetState?.privateContent;if(!state)return;
+      const before=JSON.stringify({visible,lap:observations.regular});
+      restore(state);
+      if(before===JSON.stringify({visible,lap:observations.regular}))return;
+      sync();redraw.forEach(fn=>fn());
+    });
+    sync();
+  })();
+  </script>
+</div>

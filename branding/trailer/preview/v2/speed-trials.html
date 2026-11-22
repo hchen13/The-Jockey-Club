@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Jockey Club · Speed trials</title>
+<style>
+@font-face{font-family:Clubhouse;src:url("../../../../tools/race_analysis/dashboard/fonts/Rye-Regular.ttf") format("truetype")}
+*{box-sizing:border-box}
+html,body{width:2580px;height:1080px;margin:0;overflow:hidden;background:#101010}
+#trial{width:2580px;height:1080px}
+#score{display:block;width:2580px;height:174px}
+#angles{display:grid;position:relative;grid-template-columns:1fr 1fr;width:2580px;height:906px}
+#angles::after{position:absolute;content:"";left:1288px;top:0;bottom:0;width:4px;background:#101010}
+video{display:block;width:1290px;height:906px;object-fit:cover}
+.speed-readout{position:absolute;top:526px;width:260px;height:92px;border:4px solid #171511}
+</style>
+</head>
+<body>
+<main id="trial" data-composition-id="speed-trial" data-width="2580" data-height="1080" data-start="0">
+<canvas id="score" width="2580" height="174" aria-label="Split screen trial timing"></canvas>
+<section id="angles" aria-label="Vanilla on the left, Speed Override on the right"></section>
+</main>
+<!-- Source frame numbers at 60 fps. The camera crosses the far edge of the
+     small starting bridge, and later the near edge of the canyon trestle.
+     Both cuts retain the standstill and run-up. Race clocks measure only
+     the distance between these two shared visible landmarks. -->
+<script type="application/json" id="measurements">
+{
+  "2": {
+    "breed":"Morgan","frames":1800,"lead":390,
+    "angles":[
+      {"mode":"Vanilla","source":"speed-vanilla-level2.mp4","start":3164,"finish":4322},
+      {"mode":"Speed Override","source":"speed-override-level2.mp4","start":4898,"finish":6236}
+    ]
+  },
+  "10": {
+    "breed":"Thoroughbred","frames":1560,"lead":360,
+    "angles":[
+      {"mode":"Vanilla","source":"speed-vanilla-max.mp4","start":4665,"finish":5750},
+      {"mode":"Speed Override","source":"speed-override-max.mp4","start":13324,"finish":14158}
+    ]
+  }
+}
+</script>
+<script>
+const params = new URLSearchParams(location.search);
+const grade = params.get("level") || "2";
+const trial = JSON.parse(document.querySelector("#measurements").textContent)[grade];
+const canvas = document.querySelector("#score");
+const ctx = canvas.getContext("2d", {alpha:false});
+const ink="#101010", paper="#eee9dc", muted="#c5c0b4", red="#c52027";
+document.querySelector("#trial").dataset.duration=trial.frames/60;
+function type(text,x,y,size,color,align="left"){
+  ctx.font=size+"px Clubhouse";ctx.textAlign=align;ctx.fillStyle=color;
+  ctx.fillText(text,x,y);
+  return ctx.measureText(text).width;
+}
+function line(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(x,y,w,h);}
+const elapsed=trial.angles.map(a=>a.finish-a.start);
+function states(frame){
+  return elapsed.map((length,i)=>{
+    const done=frame>=trial.lead+length;
+    const ahead=length<elapsed[1-i];
+    // Display tenths while both riders move. Freeze the frame-measured
+    // hundredths independently as each camera passes the trestle entrance.
+    const s=Math.max(0,frame-trial.lead);
+    return {
+      clock:done?(length/60).toFixed(2):(Math.floor(s/6)/10).toFixed(1),
+      phase:done?(ahead?"1ST TO FINISH":"2ND TO FINISH"):(s>0||frame===trial.lead?"ON THE CLOCK":"RUN-UP"),
+      first:done&&ahead
+    };
+  });
+}
+function draw(frame){
+  line(0,0,2580,174,ink);
+  const heading=trial.breed.toUpperCase();
+  const breedWidth=type(heading,48,55,52,paper);
+  line(70+breedWidth,22,3,35,red);
+  type("SPEED "+grade+" / 10",94+breedWidth,51,34,muted);
+  type("START BRIDGE  TO  CANYON TRESTLE",2532,50,35,muted,"right");
+  line(48,77,2484,2,"#433e37");line(1288,84,4,90,"#38342e");
+  states(frame).forEach((state,i)=>{
+    const x=i*1290;
+    type(trial.angles[i].mode.toUpperCase(),x+48,145,54,paper);
+    const statRight=x+993;
+    const statusWidth=type(state.phase,statRight,139,32,state.first?paper:muted,"right");
+    if(state.first)line(statRight-statusWidth-18,113,5,29,red);
+    type(state.clock+" s",x+1242,145,50,paper,"right");
+  });
+}
+window.speedTrial={
+  config:trial,ready:document.fonts.load("52px Clubhouse"),
+  render(frame){draw(frame);return canvas.toDataURL("image/png").split(",")[1];},
+  key(frame){return JSON.stringify(states(frame));}
+};
+window.speedTrial.ready.then(()=>{
+  draw(0);
+  if(params.has("plates"))return;
+  const root=new URL(params.get("media")||"../../media/Red%20Dead%20Redemption%202/",location.href);
+  const angles=document.querySelector("#angles");
+  const readouts=[];
+  const videos=trial.angles.map((a,i)=>{
+    const v=document.createElement("video");
+    const offset=(a.start-trial.lead)/60;
+    v.src=new URL(a.source,root).href;v.preload="auto";v.playsInline=true;v.muted=i===1;
+    v.dataset.start=0;v.dataset.duration=trial.frames/60;v.dataset.mediaStart=offset;v.dataset.trackIndex=i;
+    v.addEventListener("loadedmetadata",()=>{v.currentTime=offset;},{once:true});
+    const hud=document.createElement("canvas");hud.width=252;hud.height=84;
+    hud.className="speed-readout";hud.style.left=(i*1290+36)+"px";hud.hidden=true;
+    readouts.push(hud);angles.append(v,hud);return v;
+  });
+  let playing=false;
+  function tick(){
+    if(!playing)return;
+    const frame=Math.round(videos[0].currentTime*60)-trial.angles[0].start+trial.lead;
+    draw(Math.max(0,frame));
+    readouts.forEach((hud,i)=>{
+      hud.hidden=frame<trial.lead;
+      if(!hud.hidden)hud.getContext("2d").drawImage(videos[i],45,1368,126,42,0,0,252,84);
+    });
+    if(frame>=trial.frames-1){playing=false;videos.forEach(v=>v.pause());return;}
+    requestAnimationFrame(tick);
+  }
+  document.body.addEventListener("click",async()=>{
+    if(playing){playing=false;videos.forEach(v=>v.pause());return;}
+    if(videos[0].currentTime*60>=trial.angles[0].start-trial.lead+trial.frames-1){
+      videos.forEach((v,i)=>v.currentTime=(trial.angles[i].start-trial.lead)/60);
+    }
+    await Promise.all(videos.map(v=>v.play()));playing=true;tick();
+  });
+});
+</script></body></html>

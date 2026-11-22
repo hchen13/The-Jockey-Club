@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Jockey Club · 双语字幕</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: transparent; }
+    #caption-plate { position: relative; width: 2300px; height: 180px; }
+    .caption {
+      position: absolute; left: 0; bottom: 0; width: 100%;
+      display: flex; align-items: center; flex-direction: column; gap: 3px;
+      color: #fff9ed; text-align: center; text-shadow: 0 2px 3px #060604, 0 0 8px #100f0c;
+      font-family: "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    }
+    .caption span {
+      display: block; max-width: 2250px; background: rgba(14, 13, 11, .78);
+      padding: 3px 19px 4px; line-height: 1.22;
+    }
+    .caption .zh { font-weight: 650; font-size: 46px; }
+    .caption .en { font: 500 37px/1.2 Georgia, serif; color: #fff9ed; }
+  </style>
+</head>
+<body>
+  <main id="caption-plate">
+    <div class="caption"><span class="zh"></span><span class="en" lang="en"></span></div>
+  </main>
+  <script>
+    function setCaption(zh, en) {
+      document.querySelector(".zh").textContent = zh;
+      document.querySelector(".en").textContent = en;
+    }
+    const query = new URLSearchParams(location.search);
+    setCaption(query.get("zh") || "", query.get("en") || "");
+  </script>
+</body>
+</html>

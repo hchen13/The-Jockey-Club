@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Jockey Club · 片名字卡</title>
+  <style>
+    @font-face {
+      font-family: "Club Lino";
+      src: url("../../../tools/race_analysis/dashboard/fonts/Rye-Regular.ttf") format("truetype");
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: "Club Slab";
+      src: local("Georgia");
+      font-weight: 700;
+    }
+    :root { --paper: #eee9dc; --type: #e9e6df; --ink: #101010; --red: #c52027; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: transparent; }
+    #plate { width: 2580px; height: 1080px; color: var(--paper); }
+    .scene-content { display: flex; width: 100%; height: 100%; flex-direction: column; align-items: center; }
+    .scene-content[hidden], [hidden] { display: none; }
+    #masthead { justify-content: center; padding: 0 80px 24px; gap: 3px; }
+    .emblem { display: flex; align-items: center; justify-content: center; gap: 27px; }
+    .emblem::before, .emblem::after { content: ""; width: 93px; height: 5px; background: var(--red); }
+    .emblem svg { width: 76px; height: 80px; }
+    h1 {
+      margin: 0; color: var(--paper); font: 400 214px/1.04 "Club Lino", Impact, serif;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    #caption { padding: 30px 80px 0; }
+    .ink {
+      position: relative; isolation: isolate; width: max-content; max-width: 1040px;
+      padding: 13px 55px 16px; text-align: center;
+    }
+    .ink::before {
+      content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(16, 16, 16, 0.87);
+      mask: url("../../../tools/race_analysis/dashboard/assets/brush-menu.svg") center / 100% 100% no-repeat;
+    }
+    h2 {
+      margin: 0; font: 700 53px/1.22 "Club Slab", "Songti SC", SimSun, serif;
+      letter-spacing: 2px; text-shadow: 0 2px 3px var(--ink);
+    }
+    p {
+      margin: 4px 0 0; color: var(--type); font: 500 35px/1.25 "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      letter-spacing: 1px; text-shadow: 0 2px 2px var(--ink);
+    }
+  </style>
+</head>
+<body>
+  <main id="plate" data-composition-id="trailer-card" data-width="2580" data-height="1080">
+    <div id="masthead" class="scene-content" hidden>
+      <div class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 32 34" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 29C1 22 3 6 10 3c4-2 8-2 12 0 7 3 9 19 2 26l-5-4c5-5 4-16 0-18a7 7 0 0 0-6 0c-4 2-5 13 0 18l-5 4Z"/>
+          <path d="m7 12 3 1m-3 5 3-.2m15-5-3 1m3 5-3-.2M13 4v3m6-3v3"/>
+        </svg>
+      </div>
+      <h1 lang="en">The Jockey Club</h1>
+    </div>
+    <div id="caption" class="scene-content" hidden>
+      <div class="ink"><h2></h2><p></p></div>
+    </div>
+  </main>
+  <script>
+    const labels = {
+      mary: ["玛丽贝思的邀赛"],
+      fixed: ["固定对决"],
+      encounter: ["路边邀赛", "拿齐原版赛马奖励后，路上仍会有人邀赛"],
+      breed: ["品种限定赛"],
+      course: ["偏离赛道"],
+      market: ["赛马会经纪人", "正式胜绩计入报价"],
+      member: ["会员登记", "赛马下注现已开放"],
+      handicap: ["瓦伦丁 · 让磅赛", "独赢 · 蒂莉"],
+      wfa: ["草莓镇 · 平磅赛", "位置 · 查尔斯"],
+      club: ["Clubhouse · 赛后回放", "纯血马挑战"],
+      camp: ["尾声 · 马掌望台"],
+      dose: ["马匹兴奋剂"],
+      line: ["最佳走线"],
+      final: ["亚瑟·摩根的最终对决", "赢下纯血马挑战后开放"]
+    };
+    const id = new URLSearchParams(location.search).get("card") || "title";
+    if (id === "title") {
+      document.querySelector("#masthead").hidden = false;
+    } else if (Object.hasOwn(labels, id)) {
+      const [title, detail] = labels[id];
+      document.querySelector("#caption").hidden = false;
+      document.querySelector("h2").textContent = title;
+      const subtitle = document.querySelector("p");
+      subtitle.hidden = !detail;
+      subtitle.textContent = detail || "";
+    } else {
+      throw new Error("Unknown trailer card: " + id);
+    }
+  </script>
+</body>
+</html>

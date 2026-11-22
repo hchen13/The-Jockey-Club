@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>The Jockey Club · Speed comparison</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@font-face {font-family:Hapna;src:local("Georgia");font-weight:700}
+:root {--paper:#eee9dc;--ink:#101010;--red:#c52027}
+* {box-sizing:border-box}
+html,body {width:2580px;height:1080px;margin:0;overflow:hidden;background:transparent;color:var(--paper);font-family:"Microsoft YaHei","Arial",sans-serif}
+#speed {position:relative;width:100%;height:100%}
+.grid {display:grid;width:100%;height:100%;grid-template-columns:1fr 1fr}
+[hidden] {display:none!important}
+.stat {position:relative;min-width:0;overflow:hidden;background:#151510}
+.stat:first-child {border-right:4px solid #332f27}
+.stat .backdrop {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.34) saturate(.7)}
+.stat::after {content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,12,10,.50),rgba(12,12,10,0) 64%);pointer-events:none}
+.stat-content {position:relative;z-index:1;width:100%;height:100%;padding:115px 85px 195px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.breed {margin:0 0 8px;font:700 74px/1.1 SimSun,"Songti SC",serif;text-shadow:0 3px 12px #111}
+.english {font:700 31px/1.3 Hapna,Georgia,serif;letter-spacing:3px;color:#d3c6a7;margin-bottom:37px}
+.panel {width:780px;height:352px;overflow:hidden;position:relative;box-shadow:0 2px 16px #0b0a0980}
+.panel>img {width:100%;height:100%;display:block}
+.panel>video {position:absolute;max-width:none;width:4090.24px;height:1712.20px;left:-3217.50px;top:-52.32px}
+.rail {grid-template-rows:1fr 1fr}
+.angle {position:relative;overflow:hidden;min-width:0;min-height:0}
+.angle:nth-child(odd) {border-right:3px solid #161510}
+.angle:nth-child(-n+2) {border-bottom:3px solid #161510}
+.source {position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tag-wrap {position:relative;padding:21px 27px;display:flex;align-items:flex-start;justify-content:flex-start}
+.tag {display:inline-flex;align-items:center;gap:17px;background:rgba(15,15,13,.85);box-shadow:0 1px 3px #05050470;padding:10px 19px 11px;font-size:37px;font-weight:600;line-height:1.2;text-shadow:0 1px 2px #070707}
+.tag .mode {color:#d9c8a2;font-size:33px;font-weight:500}
+.tag .mode-en {color:#d9c8a2;font:700 22px/1.2 Hapna,Georgia,serif;letter-spacing:1px}
+.tag .level {color:var(--paper)}
+.tag .divider {height:29px;width:1px;background:#b4a589}
+</style></head>
+<body><main id="speed" data-composition-id="speed-comparison" data-start="0" data-duration="22" data-width="2580" data-height="1080">
+<section class="grid" id="stats" aria-label="马匹属性"></section>
+<section class="grid rail" id="race" aria-label="速度覆盖同一轨道对照"></section>
+</main>
+<script>
+/* Source times are seconds from each original recording. Each race angle
+   starts on the frame where the last wooden bridge plank leaves the bottom
+   edge of the shot. Stats use the original 3440×1440 card region
+   (x=2706,y=44,width=656,height=296). The full edit shows stats for five
+   seconds, then all four moving sources for seventeen seconds. The continuous
+   stereo bed is vanilla-level2 from 47.733333 s, with the rider in sync when
+   the moving grid appears. For standalone inspection use ?phase=stats or
+   ?phase=race and pass the local source folder as the media URL. The frames
+   parameter selects extracted card images during offline rendering. */
+const angles = [
+  {id:"vanilla-level2",zh:"摩根马",en:"Morgan",grade:2,mode:"原版",card:45,start:52.733333},
+  {id:"override-level2",zh:"摩根马",en:"Morgan",grade:2,mode:"速度覆盖",card:68,start:81.633333},
+  {id:"vanilla-max",zh:"纯血马",en:"Thoroughbred",grade:10,mode:"原版",card:72,start:77.750000},
+  {id:"override-max",zh:"纯血马",en:"Thoroughbred",grade:10,mode:"速度覆盖",card:215,start:222.066667}
+];
+const params=new URLSearchParams(location.search);
+const frames=params.get("frames");
+const originals=params.get("media")||"media/";
+const phase=params.get("phase")||"stats";
+const labelsOnly=params.get("overlay")==="1";
+function uri(root,name){return new URL(name, new URL(root.endsWith("/")?root:root+"/",location.href)).href;}
+function makeMedia(a,role,point){
+  if(frames&&role!=="source"){const img=document.createElement("img");img.src=uri(frames,role+"-"+a.id+".jpg");img.className=role;return img;}
+  const v=document.createElement("video");v.className=role;v.muted=true;v.playsInline=true;v.preload="auto";
+  v.src=uri(originals,"speed-"+a.id+".mp4")+"#t="+point;
+  v.id=role+"-"+a.id;v.dataset.mediaStart=point;v.dataset.start=role==="source"?5:0;v.dataset.duration=role==="source"?17:5;
+  v.dataset.trackIndex=10*angles.indexOf(a)+({backdrop:0,attr:1,source:2}[role]);
+  return v;
+}
+for(const a of [angles[0],angles[2]]){
+  const article=document.createElement("article");article.className="stat";
+  if(phase==="stats")article.append(makeMedia(a,"backdrop",a.start));
+  const content=document.createElement("div");content.className="stat-content";
+  content.innerHTML='<h1 class="breed"></h1><div class="english"></div><div class="panel"></div>';
+  content.querySelector(".breed").textContent=a.zh+"  ·  "+a.grade+"级速度";
+  content.querySelector(".english").textContent=a.en.toUpperCase();
+  if(phase==="stats")content.querySelector(".panel").append(makeMedia(a,"attr",a.card));
+  article.append(content);document.querySelector("#stats").append(article);
+}
+for(const a of angles){
+  const article=document.createElement("article");article.className="angle";
+  if(!labelsOnly&&phase==="race")article.append(makeMedia(a,"source",a.start));
+  const label=document.createElement("div");label.className="tag-wrap";
+  label.innerHTML='<div class="tag"><span class="level"></span><i class="divider"></i><span class="mode"></span><span class="mode-en"></span></div>';
+  label.querySelector(".level").textContent=a.zh+" · "+a.grade+"级";
+  label.querySelector(".mode").textContent=a.mode;
+  label.querySelector(".mode-en").textContent=a.id.startsWith("vanilla")?"VANILLA":"OVERRIDE";
+  article.append(label);document.querySelector("#race").append(article);
+}
+document.querySelector("#stats").hidden=phase!=="stats";document.querySelector("#race").hidden=phase!=="race";
+</script></body></html>
+

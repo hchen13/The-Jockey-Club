@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Jockey Club · 赛马会会所</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="horse-ui.css">
+</head>
+<body>
+    <div class="workbench">
+        <aside id="sidebar" class="sidebar" aria-label="赛事选项与资料" data-i18n-aria-label="赛事选项与资料">
+    <div class="brand">
+        <a class="club-brand" href="#" aria-label="The Jockey Club 赛马会会所" data-i18n-aria-label="The Jockey Club 赛马会会所">
+            <svg class="club-mark" viewBox="0 0 32 36" fill="none" aria-hidden="true">
+                <path d="M8 29C1 22 3 6 10 3c4-2 8-2 12 0 7 3 9 19 2 26l-5-4c5-5 4-16 0-18a7 7 0 0 0-6 0c-4 2-5 13 0 18l-5 4Z" stroke="currentColor" stroke-width="1.5"/>
+                <path d="m7 12 3 1m-3 5 3-.2m15-5-3 1m3 5-3-.2M13 4v3m6-3v3" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>THE JOCKEY CLUB<small><span data-i18n="赛马会会所">赛马会会所</span></small></span>
+        </a>
+
+    </div>
+        <section class="toolbar" aria-label="分析选择" data-i18n-aria-label="分析选择">
+            <div class="course-field">
+                <label id="course-label" for="course-picker"><span data-i18n="赛道">赛道</span></label>
+                <select id="course" hidden aria-hidden="true" tabindex="-1" disabled><option data-i18n="加载赛道…">加载赛道…</option></select>
+                <div class="course-picker">
+                    <button id="course-picker" class="course-picker-toggle" type="button" role="combobox" aria-haspopup="listbox" aria-controls="course-list" aria-expanded="false" aria-labelledby="course-label course-caption" disabled><span class="event-icon" aria-hidden="true" hidden></span><span id="course-caption" data-i18n="加载赛道…">加载赛道…</span></button>
+                    <div id="course-list" class="course-list" role="listbox" aria-labelledby="course-label" hidden></div>
+                </div>
+            </div>
+            <fieldset class="mode"><legend><span data-i18n="栏目">栏目</span></legend><div class="mode-buttons"><button id="plan-mode" aria-pressed="true"><span data-i18n="赛事筹备">赛事筹备</span></button><button id="record-mode" aria-pressed="false"><span data-i18n="比赛回看">比赛回看</span></button></div></fieldset>
+            <div id="plan-controls" class="preparation-sections">
+                <section id="race-reference" class="info-section preparation-section" aria-labelledby="info-title">
+                    <h2 id="info-title" class="sidebar-heading"><span data-i18n="赛事资料">赛事资料</span></h2>
+                    <div id="record-reference" class="record-reference" hidden><button id="record-id" type="button" title="点击复制比赛 ID" data-i18n-title="点击复制比赛 ID" aria-label="复制比赛 ID" data-i18n-aria-label="复制比赛 ID"></button><span id="record-copy-status" role="status" aria-live="polite"></span></div>
+                    <dl id="summary" class="summary"></dl>
+                </section>
+                <section id="global-settings" class="global-settings preparation-section" aria-labelledby="settings-title">
+                    <h2 id="settings-title" class="sidebar-heading settings-heading"><span data-i18n="赛事配置">赛事配置</span></h2>
+                </section>
+                <section id="line-planning" class="preparation-section" aria-labelledby="line-planning-title">
+                    <h2 id="line-planning-title" class="sidebar-heading"><span data-i18n="走线规划">走线规划</span></h2>
+                    <fieldset class="algorithm-picker"><legend><span data-i18n="候选算法">候选算法</span></legend><div id="algorithms"></div></fieldset>
+                    <button id="calculate" class="primary" disabled><span data-i18n="计算走线对比">计算走线对比</span></button>
+                </section>
+            </div>
+            <div id="record-controls" hidden>
+                <fieldset class="race-field" aria-labelledby="race-records-label">
+                    <legend id="race-records-label"><span data-i18n="比赛记录">比赛记录</span></legend>
+                    <div id="race-filter" class="record-filter" role="group" aria-labelledby="race-records-label">
+                        <button type="button" data-filter="finished" aria-pressed="true"><span data-i18n="完赛">完赛</span></button>
+                        <button type="button" data-filter="cancelled" aria-pressed="false"><span data-i18n="终止">终止</span></button>
+                        <button type="button" data-filter="all" aria-pressed="false"><span data-i18n="全部">全部</span></button>
+                    </div>
+                    <select id="race" disabled aria-labelledby="race-records-label"><option data-i18n="选择赛道后读取记录">选择赛道后读取记录</option></select>
+                </fieldset>
+                <span id="new-races" class="hint" aria-live="polite"></span>
+            </div>
+            <div class="toolbar-actions"><button id="reload" class="quiet"><span data-i18n="重新加载通道">重新加载通道</span></button><button id="refresh" class="quiet" title="刷新赛道与比赛列表" data-i18n-title="刷新赛道与比赛列表"><span data-i18n="刷新列表">刷新列表</span></button></div>
+        </section>
+            <section class="record-maintenance" aria-labelledby="maintenance-title">
+                <h2 id="maintenance-title" class="sidebar-heading"><span data-i18n="记录维护">记录维护</span></h2>
+                <p class="maintenance-note" data-i18n="清理比赛分析记录、诊断日志和可重建缓存；保留马匹比赛履历及其审计日志、赛马进度、设置及游戏存档。">清理比赛分析记录、诊断日志和可重建缓存；保留马匹比赛履历及其审计日志、赛马进度、设置及游戏存档。</p>
+                <button id="maintenance-clear" class="quiet" type="button"><span id="maintenance-label" data-i18n="清理记录与缓存">清理记录与缓存</span></button>
+                <p id="maintenance-status" role="status" aria-live="polite"></p>
+            </section>
+            <div id="status" role="status" aria-live="polite"><span data-i18n="正在读取赛道目录。">正在读取赛道目录。</span></div>
+            <div id="record-info"></div>
+            <div id="horse-info"></div>
+            <div class="sidebar-footer"><span data-i18n="本地赛事档案">本地赛事档案</span></div>
+        </aside>
+        <main class="workspace">
+            <header class="workspace-header">
+                <button id="sidebar-toggle" class="sidebar-toggle" aria-controls="sidebar" aria-expanded="false"><span data-i18n="赛事选项">赛事选项</span></button>
+                <div class="workspace-title"><h1 id="event-title"><span id="event-icon" class="event-icon" aria-hidden="true" hidden></span><span id="event-title-label" data-i18n="选择赛事">选择赛事</span></h1><span id="event-mode" class="event-mode"><span data-i18n="赛事筹备">赛事筹备</span></span></div>
+                <div class="language-switch" role="group" aria-label="界面语言" data-i18n-aria-label="界面语言"><button type="button" class="language-button" data-language="zh" aria-pressed="true" lang="zh-CN"><span data-i18n="中">中</span></button><button type="button" class="language-button" data-language="en" aria-pressed="false" lang="en">En</button></div>
+            </header>
+            <nav id="lap-navigation" class="lap-navigation lap-navigation-shell" aria-label="圈次" data-i18n-aria-label="圈次" hidden></nav>
+            <div class="compatibility-hooks" hidden><span id="connection"></span><p id="source-note"></p><p id="precision"></p></div>
+            <div id="content" class="content"><div class="empty"><strong><span data-i18n="选择赛道后开始分析">选择赛道后开始分析</span></strong><p><span data-i18n="查看建议路线，或选择比赛回看。">查看建议路线，或选择比赛回看。</span></p></div></div>
+        </main>
+    </div>
+    <div id="tooltip" role="tooltip" hidden></div>
+    <script src="i18n.js" defer></script>
+    <script src="horse-ui.js" defer></script>
+    <script src="race-ui.js" defer></script>
+    <script src="app.js" defer></script>
+</body>
+</html>

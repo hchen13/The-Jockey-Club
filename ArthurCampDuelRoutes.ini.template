@@ -1,0 +1,79 @@
+; The one-on-one Arthur's own horses offer - TEMPLATE. Becomes
+; ArthurCampDuelRoutes.ini in the game directory once every TODO is filled;
+; until then it does nothing and the log says "camp race: arthur-camp-duel
+; has no route file yet".
+;
+; Lock on to any one of the six horses standing at the camp and the same two
+; prompts appear as on any other host, the paid race and the free practice.
+; Whichever horse was locked on to is the one Arthur rides; the player rides
+; their own, of any breed. There is one route for all six, and no host point
+; to survey: he and the horse are made at the start line when the choice is
+; made, behind the fade.
+;
+; Judged in a corridor, like Charles's mountain ride: the recorded line IS the
+; course, and leaving it loses the race.
+;
+; Captures, game running, from the repository root:
+;   1. At the start line, facing the direction of travel:
+;        python tools/capture_race_point.py <pid>    -> [Point.arthur_duel_start_01]
+;        python tools/capture_race_heading.py <pid>  -> GridHeading
+;   2. At the finish:
+;        python tools/capture_race_point.py <pid>    -> [Point.arthur_duel_finish_01]
+;   3. python tools/record_player_course.py <pid>, then ride the whole thing
+;      at racing pace. Ctrl+C stops it; the capture lands under
+;      analysis/player-courses/. Hand it over and
+;      tools/build_segmented_circuit.py writes the [Circuit.Trip] nodes below.
+;
+; A ring instead of a line: make the finish point the start point again, set
+; Mode=SingleLap, and the builder writes [Circuit.Entry]/[Circuit.Shared]/
+; [Circuit.Return]/[Circuit.Finish] with a Gate list in [Circuit] instead of
+; [Circuit.Trip]. Either shape is corridor-judged.
+
+[Route]
+; One recorded line, open at both ends, judged in a corridor.
+Mode=SingleTrip
+; Arthur rides in both chapters, as at his camp.
+Host=Arthur
+Title=A Race with Arthur
+TitleZh=与亚瑟的单挑赛
+StartPoint=arthur_duel_start_01
+FinishPoint=arthur_duel_finish_01
+; No Breed here: he rides the horse that was locked on to, whatever it is, and
+; the player brings their own.
+; The course stays policed for the whole race, not only at the start.
+; Arthur rides the horse the player locked on to, with the same earned edge as
+; his stakes race: a whole level, ten seconds a burst, earned again by
+; galloping flat out. His ranks follow his own [OpponentDifficulty] entry in
+; TheJockeyClub.ini, as at every other station.
+HostSpeedLevelBonus=1.0
+HostBoostSeconds=10
+ContinuousClearance=1
+RewardMultiplier=5.0
+StakeMultiplier=5.0
+; TODO: the way the starting grid faces.
+GridHeading=TODO
+
+[Point.arthur_duel_start_01]
+Name=TODO
+NameZh=TODO
+X=TODO
+Y=TODO
+Z=TODO
+
+[Point.arthur_duel_finish_01]
+Name=TODO
+NameZh=TODO
+X=TODO
+Y=TODO
+Z=TODO
+
+; The corridor: how far either side of the recorded line a rider may go, and
+; how far above or below it. SingleTrip takes these two and nothing else.
+[Circuit]
+TrackHalfWidth=12
+HeightTolerance=8
+
+; TODO: the recorded line, from tools/build_segmented_circuit.py.
+; [Circuit.Trip]
+; Node0=...
+; Node1=...

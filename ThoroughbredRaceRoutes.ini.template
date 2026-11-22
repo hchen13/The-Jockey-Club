@@ -1,0 +1,99 @@
+; Thoroughbred circuit - TEMPLATE. Becomes ThoroughbredRaceRoutes.ini in the
+; game directory once every TODO is filled from a recording; until then the
+; station stays off the map (a file that does not parse is ignored, and the
+; log says "route config thoroughbred-circuit: rejected ...").
+;
+; The layout is the Valentine circuit's (CharlesRaceRoutes.ini): a multi-lap
+; race is one recorded ride - from the start line INTO the loop (Entry),
+; round the loop (Shared, ridden every lap), the loop's closing stretch back
+; to where the laps join (Return), and on the last lap the branch to the
+; finish (Finish). Recorded with the read-only tools, game running:
+;   1. At the start line, facing the direction of travel:
+;        python tools/capture_race_point.py <pid>      -> start point X/Y/Z
+;        python tools/capture_race_heading.py <pid>    -> GridHeading
+;   2. Where the host waits, a few metres off the line, facing the approach:
+;        python tools/capture_race_point.py <pid>      -> host point
+;        python tools/capture_race_heading.py <pid>    -> HostHeading
+;   3. python tools/record_player_course.py <pid>
+;      then ride: start line -> round the loop TWICE at racing pace -> to the
+;      finish (the finish may be the start line itself). Ctrl+C stops; the
+;      capture lands under analysis/player-courses/.
+;   4. Hand the capture over; tools/build_segmented_circuit.py turns it into
+;      the four node sections and the gates below.
+; Title, laps, field size and stakes are yours to set.
+
+[Route]
+; The course is policed for the whole race, not only at the start.
+ContinuousClearance=1
+Mode=Circuit
+; Who waits at the line: MaryBeth, Sadie, Charles, Uncle, Karen, Pearson, Arthur or John.
+; John rides Rachel, his own seal brown Thoroughbred; Arthur his blood bay (the
+; field then spawns no blood bays); any other host the brindle. Ranks follow the
+; host's own [OpponentDifficulty] entry in TheJockeyClub.ini, as at every station.
+; Host= hosts in both chapters; Era= says which chapter the station is there in.
+Host=John
+Title=Thoroughbred Circuit
+TitleZh=纯血马绕圈赛
+StartPoint=thoroughbred_circuit_start_01
+FinishPoint=thoroughbred_circuit_finish_01
+HostPoint=thoroughbred_host_01
+HostHeading=TODO
+GridHeading=TODO
+; Every entrant, the host included, rides a Thoroughbred; the player must too
+; (blood bay, dapple grey, black chestnut, reverse dapple black, brindle, or Rachel).
+Breed=Thoroughbred
+FieldMin=3
+FieldMax=5
+; Jockey speed uses the host's ability band; acceleration is each horse's own.
+; The host's earned edge, in speed levels (0.5 = half a level, as at New Austin).
+HostSpeedLevelBonus=0.5
+RewardMultiplier=Distance
+StakeMultiplier=Distance
+
+[Point.thoroughbred_circuit_start_01]
+Name=Thoroughbred Circuit Start
+NameZh=纯血马绕圈赛起点
+X=TODO
+Y=TODO
+Z=TODO
+
+[Point.thoroughbred_circuit_finish_01]
+Name=Thoroughbred Circuit Finish
+NameZh=纯血马绕圈赛终点
+X=TODO
+Y=TODO
+Z=TODO
+
+[Point.thoroughbred_host_01]
+Name=Host at the Thoroughbred Circuit
+NameZh=纯血马绕圈赛接头点
+X=TODO
+Y=TODO
+Z=TODO
+
+[Circuit]
+; Metres from the recorded centreline, on either side. Crossing it forfeits immediately.
+TrackHalfWidth=12
+HeightTolerance=6
+; Laps of the loop beyond the first; a range draws at random. 2/2 = three times round.
+ExtraLapsMin=2
+ExtraLapsMax=2
+; Rolling minimap guidance: the stretch ahead and a short tail behind.
+GuideAheadMetres=200
+GuideBehindMetres=12
+; Ordered gates a lap must pass (Shared node indices), from build_segmented_circuit.py.
+Gate0=TODO
+Gate1=TODO
+Gate2=TODO
+
+[Circuit.Entry]
+Node0=TODO
+
+[Circuit.Shared]
+Node0=TODO
+
+[Circuit.Return]
+Node0=TODO
+
+[Circuit.Finish]
+Node0=TODO

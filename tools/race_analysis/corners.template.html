@@ -1,0 +1,167 @@
+<div id="rival-corners">
+  <style>
+    #rival-corners {position:relative;color:var(--foreground);}
+    #rival-corners .corner-heading {padding-right:90px;}
+    #rival-corners .corner-legend {display:flex;gap:10px 18px;flex-wrap:wrap;margin:10px 0;}
+    #rival-corners .legend-item {display:inline-flex;align-items:center;gap:6px;}
+    #rival-corners button.legend-item {appearance:none;background:transparent;border:0;border-radius:0;color:var(--foreground);padding:3px 0;font:inherit;}
+    #rival-corners button.legend-item[aria-pressed="false"] {opacity:.45;}
+    #rival-corners .swatch {display:inline-block;width:24px;border-top:3px solid var(--viz-series-1);}
+    #rival-corners .swatch-rival {border-color:var(--viz-series-2);border-top-style:dashed;}
+    #rival-corners .swatch-plan {border-color:var(--viz-series-3);border-top-width:1px;}
+    #rival-corners .swatch-corridor {border-color:var(--muted-foreground);border-top-width:8px;opacity:.2;}
+    #rival-corners .panels {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}
+    #rival-corners .corner-panel {min-width:0;}
+    #rival-corners .corner-svg {display:block;width:100%;}
+    #rival-corners .corner-svg text {fill:var(--foreground);font-family:inherit;font-size:12px;font-weight:400;}
+    #rival-corners .corner-svg .domain,#rival-corners .corner-svg .tick line {stroke:var(--border);}
+    #rival-corners .corner-svg .trail {fill:none;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;}
+    #rival-corners .corner-svg .you-line {stroke:var(--viz-series-1);}
+    #rival-corners .corner-svg .rival-line {stroke:var(--viz-series-2);stroke-dasharray:5 3;}
+    #rival-corners .corner-svg .plan {stroke:var(--viz-series-3);stroke-width:1;fill:none;}
+    #rival-corners .corner-note {margin-top:6px;}
+    #rival-corners .corner-tip {position:absolute;pointer-events:none;z-index:3;background:var(--popover);color:var(--popover-foreground);border:1px solid var(--border);padding:8px 10px;max-width:250px;}
+    #rival-corners .corner-tip[hidden] {display:none;}
+    @media(max-width:639px) {#rival-corners .panels {grid-template-columns:minmax(0,1fr);}}
+    @media(pointer:coarse) {#rival-corners button.legend-item {min-height:44px;}}
+  </style>
+  <h3 class="corner-heading">__TITLE__ · 急弯实际走线</h3>
+  <div class="text-small text-muted">等比例平面轨迹 · 各圈分别投影到录制路线</div>
+  <div class="corner-legend text-small">
+    <button type="button" class="legend-item cursor-interaction" data-series="you" aria-pressed="true"><span class="swatch"></span>你</button>
+    <button type="button" class="legend-item cursor-interaction" data-series="rival" aria-pressed="true"><span class="swatch swatch-rival"></span>__RIVAL__</button>
+    <button type="button" class="legend-item cursor-interaction" data-series="plan" aria-pressed="true"><span class="swatch swatch-plan"></span>实际下发路线与节点</button>
+    <button type="button" class="legend-item cursor-interaction" data-series="corridor" aria-pressed="true"><span class="swatch swatch-corridor"></span>名义赛道走廊</button>
+  </div>
+  <div class="panels"></div>
+  <div class="text-small text-muted corner-note">灰带：完整走廊。轨迹未经平滑处理。</div>
+  <div class="text-small text-muted corner-note">圆点：5 m 窗口最低速的位置。规划线缺口：未连续记录到的节点。</div>
+  <div class="tooltip corner-tip text-small tabular-nums" role="tooltip" hidden></div>
+  <div class="sr-only">各圈所选弯道的俯视图。你的实测路线为实线，__RIVAL__为虚线，细线和小节点为实际下发的规划路线。按双方各自通过该弯的记录对比。</div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script type="application/json" id="rival-corner-data">__DATA__</script>
+  <script>
+  (() => {
+    const root=document.getElementById("rival-corners");
+    const data=JSON.parse(document.getElementById("rival-corner-data").textContent);
+    const panels=data.panels;
+    const tip=root.querySelector(".corner-tip");
+    let pinned=false;
+    const visible={you:true,rival:true,plan:true,corridor:true};
+    const redraw=[];
+    function applyState(state) {
+      if(state?.source!==data.source)return;
+      for(const key of Object.keys(visible))if(typeof state[key]==="boolean")visible[key]=state[key];
+    }
+    applyState(window.openai?.widgetState?.privateContent);
+    function sync() {
+      root.querySelectorAll("[data-series]").forEach(b=>b.setAttribute("aria-pressed",String(visible[b.dataset.series])));
+    }
+    function persist() {
+      window.openai?.setWidgetState({
+        modelContent:{race:data.source,visibleSeries:Object.keys(visible).filter(k=>visible[k])},
+        privateContent:{source:data.source,...visible}
+      }).catch(()=>{});
+    }
+    sync();
+    const colors={you:"var(--viz-series-1)",rival:"var(--viz-series-2)"};
+    const names=data.names;
+    const parent=d3.select(root.querySelector(".panels"));
+    for(const panel of panels) {
+      const section=parent.append("section").attr("class","corner-panel");
+      section.append("h3").text(`第 ${panel.lap} 圈 · ${panel.name} · ${panel.lo.toFixed(0)}–${panel.hi.toFixed(0)} m`);
+      section.append("div").attr("class","plot");
+      const stat=data.stats.find(s=>s.lap===panel.lap&&s.bend===panel.name);
+      section.append("div").attr("class","text-small tabular-nums").text(
+        `最大 20 m 转角：你 ${stat.actors.you.curvature.max20mAngle.toFixed(0)}° · __RIVAL__ ${stat.actors.rival.curvature.max20mAngle.toFixed(0)}°`);
+      section.append("div").attr("class","text-small text-muted tabular-nums").text(
+        `最低 5 m 窗口速度：你 ${stat.actors.you.min5mKmh.toFixed(1)} · __RIVAL__ ${stat.actors.rival.min5mKmh.toFixed(1)} km/h`);
+      const plot=section.select(".plot").node();
+      function draw() {
+        const width=plot.getBoundingClientRect().width;
+        const margin={l:64,r:16,t:22,b:55};
+        const all=panel.centre.map(p=>p.slice(0,2)).concat(
+          ...Object.values(panel.actors).map(a=>a.points.map(p=>p.slice(1,3))),
+          ...panel.plan.map(c=>c.map(p=>p.slice(0,2))));
+        const xd=d3.extent(all,p=>p[0]),yd=d3.extent(all,p=>p[1]);
+        const pad=panel.halfWidth+3;xd[0]-=pad;xd[1]+=pad;yd[0]-=pad;yd[1]+=pad;
+        const innerW=width-margin.l-margin.r;
+        const scale=innerW/(xd[1]-xd[0]);
+        const innerH=(yd[1]-yd[0])*scale;
+        const height=margin.t+innerH+margin.b;
+        const x=d3.scaleLinear().domain(xd).range([margin.l,width-margin.r]);
+        const y=d3.scaleLinear().domain(yd).range([height-margin.b,margin.t]);
+        d3.select(plot).selectAll("*").remove();
+        const svg=d3.select(plot).append("svg").attr("class","corner-svg").attr("viewBox",`0 0 ${width} ${height}`)
+          .attr("width",width).attr("height",height).attr("role","img").attr("aria-label",`第 ${panel.lap} 圈弯 ${panel.name} 的双方真实轨迹和规划路线`);
+        svg.append("title").text(`弯 ${panel.name}，实际走线与下发路线对照`);
+        svg.append("rect").attr("data-chart-frame","").attr("x",margin.l).attr("y",margin.t)
+          .attr("width",innerW).attr("height",innerH).attr("fill","none").attr("stroke","var(--border)");
+        const line=d3.line().x(p=>x(p[0])).y(p=>y(p[1]));
+        if(visible.corridor)svg.append("path").datum(panel.centre).attr("d",line).attr("fill","none").attr("stroke","var(--muted-foreground)")
+          .attr("opacity",.13).attr("stroke-width",panel.halfWidth*2*scale).attr("stroke-linejoin","round").attr("stroke-linecap","round");
+        if(visible.corridor)svg.append("path").datum(panel.centre).attr("d",line).attr("fill","none").attr("stroke","var(--muted-foreground)").attr("opacity",.6).attr("stroke-width",1);
+        for(const chunk of visible.plan?panel.plan:[]) {
+          svg.append("path").datum(chunk).attr("class","plan").attr("d",line);
+          svg.append("g").selectAll("circle").data(chunk).join("circle")
+            .attr("cx",p=>x(p[0])).attr("cy",p=>y(p[1])).attr("r",1.6).attr("fill","var(--viz-series-3)");
+        }
+        for(const actor of ["you","rival"]) {
+          if(!visible[actor])continue;
+          const points=panel.actors[actor].points;
+          svg.append("path").datum(points.map(p=>p.slice(1,3))).attr("class",`trail ${actor}-line`).attr("d",line);
+          const lowest=points.reduce((a,b)=>a[3]<b[3]?a:b);
+          svg.append("circle").attr("cx",x(lowest[1])).attr("cy",y(lowest[2])).attr("r",4).attr("fill",colors[actor]);
+          for(const f of [.15,.8]) {
+            const i=Math.floor((points.length-2)*f),a=points[i],b=points[i+1];
+            const deg=Math.atan2(y(b[2])-y(a[2]),x(b[1])-x(a[1]))*180/Math.PI+90;
+            svg.append("path").attr("d",d3.symbol().type(d3.symbolTriangle).size(34)())
+              .attr("fill",colors[actor]).attr("transform",`translate(${x(a[1])},${y(a[2])}) rotate(${deg})`);
+          }
+        }
+        svg.append("g").attr("transform",`translate(0,${height-margin.b})`).call(d3.axisBottom(x).ticks(width<400?3:5).tickSizeOuter(0));
+        svg.append("g").attr("transform",`translate(${margin.l},0)`).call(d3.axisLeft(y).ticks(4).tickSizeOuter(0));
+        svg.append("text").attr("class","axis-title").attr("data-axis","x").attr("x",margin.l+innerW/2).attr("y",height-10).attr("text-anchor","middle").text("游戏 X 坐标（m）");
+        svg.append("text").attr("class","axis-title").attr("data-axis","y").attr("transform",`translate(16,${margin.t+innerH/2}) rotate(-90)`).attr("text-anchor","middle").text("游戏 Y 坐标（m）");
+        const marker=svg.append("g");
+        function show(event) {
+          const [px,py]=d3.pointer(event,svg.node());
+          let best=null;
+          for(const actor of ["you","rival"].filter(a=>visible[a]))for(const p of panel.actors[actor].points) {
+            const dist=Math.hypot(x(p[1])-px,y(p[2])-py);
+            if(!best||dist<best.dist)best={actor,p,dist};
+          }
+          marker.selectAll("*").remove();
+          if(!best||best.dist>32){tip.hidden=true;return;}
+          marker.append("circle").attr("cx",x(best.p[1])).attr("cy",y(best.p[2])).attr("r",6)
+            .attr("fill","none").attr("stroke",colors[best.actor]).attr("stroke-width",2);
+          tip.textContent=`${names[best.actor]} · ${(best.p[0]/1000).toFixed(3)} km · ${best.p[3].toFixed(1)} km/h`;
+          tip.hidden=false;
+          const rb=root.getBoundingClientRect();
+          const tw=tip.getBoundingClientRect().width;
+          tip.style.left=`${Math.max(0,Math.min(rb.width-tw,event.clientX-rb.left+12))}px`;
+          tip.style.top=`${Math.max(0,event.clientY-rb.top-42)}px`;
+        }
+        svg.append("rect").attr("data-chart-hit","").attr("x",margin.l).attr("y",margin.t)
+          .attr("width",innerW).attr("height",innerH).attr("fill","transparent")
+          .on("pointermove",e=>{if(!pinned)show(e);})
+          .on("pointerleave",()=>{if(!pinned){tip.hidden=true;marker.selectAll("*").remove();}})
+          .on("click",e=>{pinned=!pinned;show(e);});
+        // Only mandatory axis text is used; each panel has its own measured viewport.
+        svg.attr("data-chart-ready","true");
+      }
+      redraw.push(draw);
+      new ResizeObserver(draw).observe(plot);
+      draw();
+    }
+    root.querySelectorAll("[data-series]").forEach(b=>b.addEventListener("click",()=>{
+      visible[b.dataset.series]=!visible[b.dataset.series];
+      pinned=false;tip.hidden=true;sync();redraw.forEach(fn=>fn());persist();
+    }));
+    window.addEventListener("openai:set_globals",event=>{
+      const state=event.detail?.globals?.widgetState?.privateContent;
+      if(state){applyState(state);sync();redraw.forEach(fn=>fn());}
+    });
+  })();
+  </script>
+</div>

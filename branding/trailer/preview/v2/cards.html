@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Jockey Club trailer titles</title>
+  <style>
+    @font-face {
+      font-family: "Club Lino";
+      src: url("../../../../tools/race_analysis/dashboard/fonts/Rye-Regular.ttf") format("truetype");
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: "Club Slab";
+      src: local("Georgia");
+      font-weight: 700;
+    }
+    :root { --paper: #eee9dc; --type: #ccc7b9; --red: #c52027; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: transparent; }
+    #plate {
+      width: 2580px; height: 1080px; display: grid; place-items: center;
+      color: var(--paper); text-align: center; overflow: hidden;
+    }
+    [hidden] { display: none !important; }
+    section { display: flex; flex-direction: column; align-items: center; }
+    .emblem { display: flex; align-items: center; justify-content: center; gap: 27px; }
+    .emblem::before, .emblem::after { content: ""; width: 93px; height: 5px; background: var(--red); }
+    .emblem svg { width: 76px; height: 80px; }
+    h1, h2 { color: var(--paper); font-family: "Club Lino", Impact, serif; font-weight: 400; margin: 0; }
+    h1 { font-size: 214px; line-height: 1.04; letter-spacing: 1px; text-transform: uppercase; }
+    #identity { transform: translateY(-12px); gap: 3px; }
+    #chapter { transform: translateY(2px); }
+    #chapter h2 { font-size: 160px; line-height: 1; letter-spacing: 1.6px; }
+    #chapter::after { content: ""; width: 100px; height: 5px; background: var(--red); margin-top: 26px; }
+    #closing { transform: translateY(-6px); font: 700 43px/1.28 "Club Slab", Georgia, serif; }
+    #closing h2 { font-size: 160px; line-height: 1.04; letter-spacing: 1px; text-transform: uppercase; }
+    #closing .credit { font-size: 44px; margin: 8px 0 0; }
+    #closing .rule { width: 100px; height: 5px; background: var(--red); margin: 48px 0 31px; }
+    #closing .links { margin: 0; }
+    #closing .links span + span::before { content: "·"; margin: 0 26px; color: var(--type); }
+    #closing .where { margin: 10px 0 0; font-size: 35px; color: var(--type); }
+  </style>
+</head>
+<body>
+  <main id="plate" data-composition-id="trailer-v2-card" data-width="2580" data-height="1080">
+    <section id="identity" hidden>
+      <div class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 32 34" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 29C1 22 3 6 10 3c4-2 8-2 12 0 7 3 9 19 2 26l-5-4c5-5 4-16 0-18a7 7 0 0 0-6 0c-4 2-5 13 0 18l-5 4Z"/>
+          <path d="m7 12 3 1m-3 5 3-.2m15-5-3 1m3 5-3-.2M13 4v3m6-3v3"/>
+        </svg>
+      </div>
+      <h1>The Jockey Club</h1>
+    </section>
+    <section id="chapter" hidden><h2></h2></section>
+    <section id="closing" hidden>
+      <h2>The Jockey Club</h2>
+      <p class="credit">Created by Ethan</p>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="links"><span>Download on Nexus Mods</span><span>Source on GitHub</span></p>
+      <p class="where">Links in the pinned comment</p>
+    </section>
+  </main>
+  <script>
+    const chapters = {
+      breed: "Breed Challenges", speed: "Speed Override", agent: "The Club Agent",
+      club: "The Clubhouse", camp: "Horseshoe Overlook"
+    };
+    const id = new URLSearchParams(location.search).get("card") || "title";
+    if (id === "title") {
+      document.querySelector("#identity").hidden = false;
+    } else if (id === "end") {
+      document.querySelector("#closing").hidden = false;
+    } else if (Object.hasOwn(chapters, id)) {
+      document.querySelector("#chapter h2").textContent = chapters[id];
+      document.querySelector("#chapter").hidden = false;
+    } else {
+      throw new Error("Unknown title card: " + id);
+    }
+  </script>
+</body>
+</html>

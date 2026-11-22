@@ -1,0 +1,422 @@
+[
+  {
+    "start": 23.0,
+    "end": 26.883,
+    "en": "Out by Emerald Station, Mary-Beth is waiting for a race.",
+    "zh": "翡翠牧场车站旁，玛丽贝思正在等人和她赛一场。"
+  },
+  {
+    "start": 37.0,
+    "end": 39.118,
+    "en": "First one to Valentine takes it.",
+    "zh": "谁先到瓦伦丁，谁就赢。"
+  },
+  {
+    "start": 66.0,
+    "end": 69.386,
+    "en": "Beat her to town, and Pearson will be ready to race you.",
+    "zh": "抢在她前面进镇，皮尔逊就会接受你的挑战。"
+  },
+  {
+    "start": 78.0,
+    "end": 81.864,
+    "en": "You'll find him down by the lake. Ride up and ask for a race.",
+    "zh": "沿着湖岸就能找到他。骑到他面前，就能约上一场。"
+  },
+  {
+    "start": 89.0,
+    "end": 93.108,
+    "en": "Word gets around. More riders will take you on as you win.",
+    "zh": "消息传开了。赢得越多，愿意应战的骑手也越多。"
+  },
+  {
+    "start": 96.4,
+    "end": 99.21,
+    "en": "Who else is out there? That's for you to find out.",
+    "zh": "荒野里还有谁在等你？留给你亲自去找。"
+  },
+  {
+    "start": 104.8,
+    "end": 109.962,
+    "en": "In the original game, roadside races dry up once you've earned both rewards.",
+    "zh": "在原版里，赢齐两次赛马奖励，路上就再也遇不到邀赛了。"
+  },
+  {
+    "start": 123.6,
+    "end": 128.668,
+    "en": "The Jockey Club brings those meetings back. The next stranger might want a race.",
+    "zh": "赛马会让这些偶遇回来了。下一个跟你搭话的陌生人，也许就想比一场。"
+  },
+  {
+    "start": 136.15,
+    "end": 139.464,
+    "en": "Keep winning duels, and breed challenges open up.",
+    "zh": "一路赢下对决，还会解锁品种限定赛。"
+  },
+  {
+    "start": 143.2,
+    "end": 145.178,
+    "en": "Bring the breed your host asks for.",
+    "zh": "你得骑着对手指定的马种来赴约。"
+  },
+  {
+    "start": 148.0,
+    "end": 151.965,
+    "en": "Rains Fall wants an American Paint. This horse won't do.",
+    "zh": "落雨只接受美国花马。骑眼前这匹，他可不答应。"
+  },
+  {
+    "start": 154.0,
+    "end": 158.668,
+    "en": "Round the corner in Valentine, and John has a different race in mind.",
+    "zh": "转过瓦伦丁的街角，约翰等着和你比另一场。"
+  },
+  {
+    "start": 163.0,
+    "end": 166.357,
+    "en": "Bring a Thoroughbred, and he'll take you to the starting line.",
+    "zh": "这次骑纯血马来，他就会带你上起跑线。"
+  },
+  {
+    "start": 181.0,
+    "end": 184.495,
+    "en": "Run wide, and you'll get a warning to return to the course.",
+    "zh": "跑出赛道后，你会先收到返回路线的警告。"
+  },
+  {
+    "start": 187.6,
+    "end": 190.205,
+    "en": "Stay out too long and the race is over.",
+    "zh": "迟迟不回，就会被判出局。"
+  },
+  {
+    "start": 194.4,
+    "end": 197.458,
+    "en": "A winning horse can earn its keep long after the race.",
+    "zh": "一匹赢过比赛的马，下了赛道也有身价。"
+  },
+  {
+    "start": 202.5,
+    "end": 206.226,
+    "en": "You'll find the club agent beside the stables near Van Horn.",
+    "zh": "范霍恩附近的马厩旁，就能找到赛马会经纪人。"
+  },
+  {
+    "start": 208.6,
+    "end": 212.784,
+    "en": "He only buys horses with an official win. This one has none.",
+    "zh": "他只收赢过正式比赛的马。这匹还没有胜绩。"
+  },
+  {
+    "start": 215.5,
+    "end": 218.603,
+    "en": "Let's ride back with the Mustang that beat Mary-Beth.",
+    "zh": "这次换上赢过玛丽贝思的野马，再来找他。"
+  },
+  {
+    "start": 223.5,
+    "end": 227.289,
+    "en": "Now you can select Sell Horse. He'll check its race record.",
+    "zh": "现在可以选「出售马匹」了。他会调出这匹马的赛绩。"
+  },
+  {
+    "start": 230.0,
+    "end": 234.237,
+    "en": "There's the win over Mary-Beth. His offer is twenty-two dollars.",
+    "zh": "赢玛丽贝思的那一场也记在账上。经纪人报价二十二美元。"
+  },
+  {
+    "start": 240.1,
+    "end": 243.393,
+    "en": "Sell the club a winner, and you've earned the right to join.",
+    "zh": "给赛马会卖出一匹胜马，你才有资格申请入会。"
+  },
+  {
+    "start": 247.1,
+    "end": 251.19,
+    "en": "A thousand dollars buys membership and opens the betting ring.",
+    "zh": "缴一千美元会费就能入会，往后也能在赛场下注。"
+  },
+  {
+    "start": 253.4,
+    "end": 257.131,
+    "en": "There's an honorary membership, too. I'll leave that one to you.",
+    "zh": "俱乐部也设有荣誉会员。怎样取得这个身份，留给你去发现。"
+  },
+  {
+    "start": 261.6,
+    "end": 265.486,
+    "en": "Start in Valentine, where the bookmaker runs a handicap.",
+    "zh": "先到瓦伦丁。这里的庄家办的是让磅赛。"
+  },
+  {
+    "start": 268.4,
+    "end": 273.515,
+    "en": "The horses share speed and acceleration ratings. Each keeps its own handling.",
+    "zh": "各匹马的速度和加速度档位相同，操控手感仍各有差别。"
+  },
+  {
+    "start": 286.2,
+    "end": 289.046,
+    "en": "I'll put ten dollars on Tilly Jackson to win.",
+    "zh": "这一场，我押十美元，赌蒂莉·杰克逊拿第一。"
+  },
+  {
+    "start": 293.7,
+    "end": 298.252,
+    "en": "A win ticket needs first place. A place ticket pays on the top three.",
+    "zh": "独赢得押中冠军，位置票只要押中的骑手跑进前三。"
+  },
+  {
+    "start": 315.3,
+    "end": 319.18,
+    "en": "Hold the right mouse button to follow your pick. Here comes Tilly.",
+    "zh": "按住鼠标右键，镜头会先跟上你押的骑手。看，蒂莉来了。"
+  },
+  {
+    "start": 323.7,
+    "end": 327.09,
+    "en": "Let go and hold it again to follow another rider.",
+    "zh": "松开右键再按住，就能换一名骑手跟拍。"
+  },
+  {
+    "start": 341.3,
+    "end": 344.554,
+    "en": "Tilly's found a way through. She could actually win this.",
+    "zh": "蒂莉找到空当冲上来了。照这样跑，她还真有机会赢。"
+  },
+  {
+    "start": 349.1,
+    "end": 353.364,
+    "en": "Oh! She clipped the post. And the riders behind have nowhere to go.",
+    "zh": "哎！她撞上柱子了，后面跟上来的骑手也躲不开。"
+  },
+  {
+    "start": 357.3,
+    "end": 359.228,
+    "en": "Tilly's out. There goes our ten.",
+    "zh": "蒂莉出局。这十美元也输掉了。"
+  },
+  {
+    "start": 364.0,
+    "end": 367.445,
+    "en": "Over in Strawberry, they run a weight-for-age race.",
+    "zh": "换到草莓镇，这里办的是平磅赛，也叫 Weight for Age。"
+  },
+  {
+    "start": 372.2,
+    "end": 376.344,
+    "en": "Here the horses keep their own ratings. Take a look down the field.",
+    "zh": "这里各匹马按自身属性参赛。翻翻名单，就能看到差别。"
+  },
+  {
+    "start": 382.0,
+    "end": 385.744,
+    "en": "Let's back Charles Smith this time. Ten dollars to place.",
+    "zh": "这回选查尔斯·史密斯。押十美元，赌他跑进前三。"
+  },
+  {
+    "start": 399.0,
+    "end": 402.604,
+    "en": "Charles has the strongest horse, and he starts at the back.",
+    "zh": "查尔斯骑着实力最强的马，从队尾出发。"
+  },
+  {
+    "start": 406.0,
+    "end": 410.135,
+    "en": "Hold V for the cinematic camera. It opens on your pick, too.",
+    "zh": "长按 V 进入电影镜头，最初对准的也是你押的骑手。"
+  },
+  {
+    "start": 417.0,
+    "end": 420.922,
+    "en": "Watch him work through the field. That's another rider behind him.",
+    "zh": "看他从后往前追，又把一名骑手甩在身后。"
+  },
+  {
+    "start": 424.0,
+    "end": 426.105,
+    "en": "Press C to switch to another rider.",
+    "zh": "再按 C，就能切到另一名骑手身上。"
+  },
+  {
+    "start": 428.2,
+    "end": 431.275,
+    "en": "Second place. Ten dollars down, twenty back.",
+    "zh": "第二名。押了十美元，领回二十。"
+  },
+  {
+    "start": 433.1,
+    "end": 436.806,
+    "en": "Ten dollars clear. Not a bad afternoon in Strawberry.",
+    "zh": "净赚十美元。草莓镇的这个下午，过得还不错。"
+  },
+  {
+    "start": 439.2,
+    "end": 443.664,
+    "en": "The mod comes with Clubhouse. Open it to replay the races you've run.",
+    "zh": "模组附带 Clubhouse。运行它，就能回放你跑过的比赛。"
+  },
+  {
+    "start": 447.1,
+    "end": 451.432,
+    "en": "Follow each rider's line, then watch the speed trace through the turn.",
+    "zh": "跟着每名骑手的路线，看他们过弯时的速度曲线。"
+  },
+  {
+    "start": 455.0,
+    "end": 458.906,
+    "en": "See where a rival sheds speed? That's where you might make a pass.",
+    "zh": "对手在哪个弯掉速最明显？那可能就是下次超车的机会。"
+  },
+  {
+    "start": 465.3,
+    "end": 469.988,
+    "en": "Speed Override widens the gap between a slow horse and a fast one.",
+    "zh": "速度覆盖把慢马与快马之间的差距进一步拉开。"
+  },
+  {
+    "start": 472.9,
+    "end": 477.867,
+    "en": "Low acceleration means a longer run before a horse reaches full speed.",
+    "zh": "加速度越低，马就需要越长的距离才能跑到极速。"
+  },
+  {
+    "start": 481.2,
+    "end": 485.399,
+    "en": "Watch the speed readout at the lower left as the Morgan gets going.",
+    "zh": "留意左下角的速度表，看这匹摩根马怎样逐渐提速。"
+  },
+  {
+    "start": 490.5,
+    "end": 494.754,
+    "en": "At speed level two, the stock Morgan reaches the bridge first.",
+    "zh": "速度只有两级时，原版的摩根马先到了桥头。"
+  },
+  {
+    "start": 500.7,
+    "end": 504.323,
+    "en": "Now give a level-ten Thoroughbred the same stretch of track.",
+    "zh": "换一匹十级速度的纯血马，再跑同一段铁轨。"
+  },
+  {
+    "start": 515.0,
+    "end": 519.349,
+    "en": "This time the override horse pulls away and reaches the bridge first.",
+    "zh": "这一次，开启速度覆盖的马拉开了距离，率先抵达桥头。"
+  },
+  {
+    "start": 526.5,
+    "end": 531.199,
+    "en": "Playing as John, win the earlier duels and all the breed challenges.",
+    "zh": "扮演约翰，赢完前面的固定对决和品种挑战。"
+  },
+  {
+    "start": 535.0,
+    "end": 537.848,
+    "en": "Then take the old trail back to Horseshoe Overlook.",
+    "zh": "然后，沿着熟悉的小路，回一趟马掌望台。"
+  },
+  {
+    "start": 548.0,
+    "end": 552.216,
+    "en": "Somebody's made camp here again. Look at the horses they've brought.",
+    "zh": "这里又有人安营了。看看拴在营地边上的都是些什么马。"
+  },
+  {
+    "start": 560.3,
+    "end": 565.695,
+    "en": "Rare coats. And look at those bars. Ten for speed and ten for acceleration.",
+    "zh": "这些毛色可不常见。再看属性，速度十格，加速度也是十格。"
+  },
+  {
+    "start": 569.0,
+    "end": 571.924,
+    "en": "Who keeps horses like these all the way out here?",
+    "zh": "是谁在这个地方，养着这样一群好马？"
+  },
+  {
+    "start": 589.6,
+    "end": 593.945,
+    "en": "I always wished Arthur had another chance. In this story, he does.",
+    "zh": "我一直希望亚瑟能再有一次机会。在这个故事里，他有了。"
+  },
+  {
+    "start": 600.2,
+    "end": 605.109,
+    "en": "Arthur lived. And there by the fire is Mary Linton, the woman he loves.",
+    "zh": "亚瑟活了下来。坐在篝火边的，是他心爱的玛丽·林顿。"
+  },
+  {
+    "start": 610.7,
+    "end": 614.872,
+    "en": "In John's time, it's Arthur who hosts the Thoroughbred challenge.",
+    "zh": "到了约翰的时代，主持纯血马挑战的正是亚瑟。"
+  },
+  {
+    "start": 619.7,
+    "end": 623.963,
+    "en": "If you remember racing John here, get ready. Arthur rides hard.",
+    "zh": "如果你还记得当年和约翰的那一场，这次可得小心。亚瑟快得很。"
+  },
+  {
+    "start": 637.1,
+    "end": 641.973,
+    "en": "A horse stimulant buys a short burst of speed. It might be just enough.",
+    "zh": "马匹兴奋剂能换来短暂的提速。也许就差这一点。"
+  },
+  {
+    "start": 650.7,
+    "end": 654.115,
+    "en": "One corner left. John is almost level with him.",
+    "zh": "还剩最后一个弯。约翰眼看就要和他并驾齐驱了。"
+  },
+  {
+    "start": 663.4,
+    "end": 667.782,
+    "en": "Arthur takes it by a nose. Two hundred sixty-three dollars, gone.",
+    "zh": "亚瑟以微弱优势获胜。这一场，二百六十三美元的赌注也输了。"
+  },
+  {
+    "start": 670.1,
+    "end": 674.936,
+    "en": "Press F11, open Course Corridor, and turn on Show Optimal Route.",
+    "zh": "按 F11 打开菜单，进入赛道边界，开启「显示最佳路线」。"
+  },
+  {
+    "start": 678.0,
+    "end": 681.922,
+    "en": "Let's try the race again. This time, follow the racing line.",
+    "zh": "再跑一次这场比赛。这一回，跟着地上的最佳走线跑。"
+  },
+  {
+    "start": 696.1,
+    "end": 699.627,
+    "en": "See how the line sets up the turn before the rocks close in?",
+    "zh": "看这条线怎样在岩壁收窄之前，提前为入弯留好角度。"
+  },
+  {
+    "start": 706.3,
+    "end": 710.698,
+    "en": "Beat Arthur's Thoroughbred challenge, and he'll offer one last duel.",
+    "zh": "赢下亚瑟的纯血马挑战，他还会邀你进行最后一场对决。"
+  },
+  {
+    "start": 713.5,
+    "end": 717.102,
+    "en": "You get to pick his horse. This time, let's give him Buell.",
+    "zh": "这次由你来给他挑马。就让亚瑟骑布埃尔吧。"
+  },
+  {
+    "start": 748.3,
+    "end": 750.688,
+    "en": "Come ride with us in The Jockey Club.",
+    "zh": "欢迎下载《The Jockey Club》，来和我们一起赛马。"
+  },
+  {
+    "start": 754.0,
+    "end": 756.827,
+    "en": "Download and source links are in the pinned comment.",
+    "zh": "下载地址和开源代码链接，见置顶评论。"
+  }
+]

@@ -1,0 +1,1637 @@
+{
+  "schema": "the-jockey-club.arthur-voice-selection",
+  "version": 1,
+  "character": "Arthur",
+  "exported_at": "2026-10-17T18:11:34.136Z",
+  "enabled": [
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_THIRD_INSULT_BEAVER_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_THIRD_INSULT_BEAVER_CONV_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "You know I can't do everything by myself here, John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_THIRD_INSULT_GENERAL_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_THIRD_INSULT_GENERAL_CONV_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_THIRD_INSULT_GENERAL_CONV_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_THIRD_INSULT_GENERAL_CONV_03",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "I just wish you weren't such a smug son of a bitch.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_THIRD_INSULT_GENERAL_CONV_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_THIRD_INSULT_GENERAL_CONV_04",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_THIRD_INSULT_GENERAL_CONV_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_THIRD_INSULT_GENERAL_CONV_05",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "So, you mean you've been doing nothing again?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_THIRD_INSULT_GENERAL_CONV_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_THIRD_INSULT_GENERAL_CONV_06",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Just make sure you don't stay gone for a year this time.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_BEAVER_CONV_PART1_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_BEAVER_CONV_PART1_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Can you make sure I don't have to rescue you for a couple of days?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_BEAVER_CONV_PART3_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_BEAVER_CONV_PART3_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "I'm only half-joking, John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART1_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART1_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "You come up with a good story for that scar yet?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART1_02",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART1_02",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Little Johnny Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART1_03",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART1_03",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART1_04",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART1_04",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "I think someone saw some wolves, not far away. You should watch yourself.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART1_05",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART1_05",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Here he is, father of the year.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART1_06",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART1_06",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Oh my God, you.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART1_07",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART1_07",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "John Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART2_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART2_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART2_02",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART2_02",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART2_03",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART2_03",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Greasy Johnny Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART2_04",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART2_04",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Best place you can hide is in a big hole, I reckon.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_CONV_PART2_05",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_CONV_PART2_05",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_MERRY_CONV_PART1_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_MERRY_CONV_PART1_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_MERRY_CONV_PART1_02",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_MERRY_CONV_PART1_02",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Don't run off on us again, Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_MERRY_CONV_PART1_03",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_MERRY_CONV_PART1_03",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_MERRY_CONV_PART2_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_MERRY_CONV_PART2_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "Oh yes, I remember now.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_MERRY_CONV_PART2_03",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_MERRY_CONV_PART2_03",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "I might have another drink to celebrate.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_PRESEAN1_CONV1_PART1_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_PRESEAN1_CONV1_PART1_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_JOHN_PRESEAN1_CONV2_PART2_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_JOHN_PRESEAN1_CONV2_PART2_01",
+      "group": "Antagonize",
+      "target": "John",
+      "text": "We all know you had a hard time of it.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_02",
+      "group": "Greet",
+      "target": "John",
+      "text": "Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_03",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_04",
+      "group": "Greet",
+      "target": "John",
+      "text": "John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_05",
+      "group": "Greet",
+      "target": "John",
+      "text": "The golden boy.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_ABICNV15_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_ABICNV15_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "It's good you're thinking about this.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_BEAVER_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_BEAVER_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_BEAVER_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_BEAVER_02",
+      "group": "Greet",
+      "target": "John",
+      "text": "Hey, John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_BEAVER_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_BEAVER_03",
+      "group": "Greet",
+      "target": "John",
+      "text": "Hey, brother.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_CFJMCNV1_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_CFJMCNV1_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Yeah, we all been in this a long time.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_CFJMCNV2_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_CFJMCNV2_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "So, things ain't going well with Abigail then?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_CFJMCNV5_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_CFJMCNV5_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_CLOSER_POSTDTC1_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_CLOSER_POSTDTC1_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "I'm just looking out for you.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_CLOSER_POSTGNG3_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_CLOSER_POSTGNG3_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "I'll fill you in some more later.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_CLOSER_POSTGRY2_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_CLOSER_POSTGRY2_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_CLOSER_POSTODR3_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_CLOSER_POSTODR3_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Yeah, I guess we're now even.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_CLOSER_POSTSEAN1_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_CLOSER_POSTSEAN1_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "You were never normal, Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_COLTER_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_COLTER_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Hi, John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_COLTER_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_COLTER_02",
+      "group": "Greet",
+      "target": "John",
+      "text": "Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_DNJCNV4_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_DNJCNV4_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "You okay?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_DNJCNV5_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_DNJCNV5_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_GUARD_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_GUARD_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Keep your eyes peeled, Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_JAVCNV2_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_JAVCNV2_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Wasn't the first time and I'm sure it won't be the last.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_JHNCNV4_CLOSER_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_JHNCNV4_CLOSER_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_JHNCNV4_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_JHNCNV4_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Yes, you really should rest, John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_JHNCNV5_CLOSER_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_JHNCNV5_CLOSER_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Oh, don't worry, I know.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_MCHCNV5_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_MCHCNV5_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_MERRY_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_MERRY_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Hey, John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_MERRY_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_MERRY_02",
+      "group": "Greet",
+      "target": "John",
+      "text": "Mr. Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_PARTY1_EARLY_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_PARTY1_EARLY_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Suddenly you seem much better, Marston.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_PARTY2_EARLY_CLOSER_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_PARTY2_EARLY_CLOSER_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "He's a brave boy.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_PARTY2_EARLY_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_PARTY2_EARLY_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Look after that kid.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_PARTY2_LATE_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_PARTY2_LATE_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Is Jack asking for slippers yet?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_POSTABI1_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_POSTABI1_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_POSTDTC2_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_POSTDTC2_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "You doing okay?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_POSTGNG3_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_POSTGNG3_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Not exactly a welcome home party.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_POSTODR1_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_POSTODR1_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "You feeling any better?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_POSTODR3_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_POSTODR3_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "John.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_POSTSEAN1_CONV1_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_POSTSEAN1_CONV1_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "You seem better.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_PRESEAN1_CONV2_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_PRESEAN1_CONV2_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_BEAVER_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_BEAVER_CONV_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "Any news?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_DRUNK_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_DRUNK_CONV_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_DRUNK_CONV_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_DRUNK_CONV_02",
+      "group": "Greet",
+      "target": "John",
+      "text": "My brother.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_DRUNK_CONV_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_DRUNK_CONV_03",
+      "group": "Greet",
+      "target": "John",
+      "text": "You ever think about the old days?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_GENERAL_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_GENERAL_CONV_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "That scar healed pretty well in the end.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_GENERAL_CONV_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_GENERAL_CONV_03",
+      "group": "Greet",
+      "target": "John",
+      "text": "See, we can be nice to each other.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_GENERAL_CONV_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_GENERAL_CONV_05",
+      "group": "Greet",
+      "target": "John",
+      "text": "What's been going on?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_GENERAL_CONV_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_GENERAL_CONV_06",
+      "group": "Greet",
+      "target": "John",
+      "text": "What are you up to?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_HORSESHOE_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_HORSESHOE_CONV_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "How are you feeling?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SECOND_WORKING_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SECOND_WORKING_CONV_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "You're keeping busy.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SSNCNV1_CLOSER_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SSNCNV1_CLOSER_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_SSNCNV2_GREET_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_SSNCNV2_GREET_01",
+      "group": "Greet",
+      "target": "John",
+      "text": "You feeling any better?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JOHN_THIRD_FAREWELL_DRUNK_CONV_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JOHN_THIRD_FAREWELL_DRUNK_CONV_03",
+      "group": "Greet",
+      "target": "John",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_THIRD_INSULT_BADLY_RESPONSE_04",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_THIRD_INSULT_BADLY_RESPONSE_04",
+      "group": "Antagonize",
+      "target": "Camp · general",
+      "text": "Christ, you're pathetic sometimes.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_LAW_CONV_PART1_01",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_LAW_CONV_PART1_01",
+      "group": "Antagonize",
+      "target": "Law",
+      "text": "You're pathetic, my friend.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_LAW_CONV_PART1_07",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_LAW_CONV_PART1_07",
+      "group": "Antagonize",
+      "target": "Law",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_LAW_CONV_PART1_09",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_LAW_CONV_PART1_09",
+      "group": "Antagonize",
+      "target": "Law",
+      "text": "Don't you look at me.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_LENNY_CONV_PART3_05",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_LENNY_CONV_PART3_05",
+      "group": "Antagonize",
+      "target": "Lenny",
+      "text": "You got a lot to learn.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_FEMALE_CONV_PART1_04",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_FEMALE_CONV_PART1_04",
+      "group": "Antagonize",
+      "target": "Stranger · female",
+      "text": "Shouldn't you be back in the field, scaring crows?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_FEMALE_CONV_PART1_07",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_FEMALE_CONV_PART1_07",
+      "group": "Antagonize",
+      "target": "Stranger · female",
+      "text": "Your face.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_FEMALE_CONV_PART2_07",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_FEMALE_CONV_PART2_07",
+      "group": "Antagonize",
+      "target": "Stranger · female",
+      "text": "What happened to you?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_MALE_CONV_PART1_03",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_MALE_CONV_PART1_03",
+      "group": "Antagonize",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_MALE_CONV_PART1_05",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_MALE_CONV_PART1_05",
+      "group": "Antagonize",
+      "target": "Stranger · male",
+      "text": "My Lord, look at you.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_MALE_CONV_PART1_07",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_MALE_CONV_PART1_07",
+      "group": "Antagonize",
+      "target": "Stranger · male",
+      "text": "Good heavens above, look at you.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_MALE_CONV_PART1_18",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_MALE_CONV_PART1_18",
+      "group": "Antagonize",
+      "target": "Stranger · male",
+      "text": "You look like a moron.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_03:INSULT_MALE_CONV_PART2_07",
+      "voice": "ARTHUR_NORMAL_03",
+      "name": "INSULT_MALE_CONV_PART2_07",
+      "group": "Antagonize",
+      "target": "Stranger · male",
+      "text": "You're ridiculous.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_ABIGAIL_SECOND_GENERAL_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_ABIGAIL_SECOND_GENERAL_CONV_01",
+      "group": "Greet",
+      "target": "Abigail",
+      "text": "You seem in a good mood.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_ABIGAIL_SECOND_GENERAL_CONV_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_ABIGAIL_SECOND_GENERAL_CONV_03",
+      "group": "Greet",
+      "target": "Abigail",
+      "text": "Sometimes I think about the old days... seems a lifetime ago.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_ABIGAIL_SECOND_GENERAL_CONV_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_ABIGAIL_SECOND_GENERAL_CONV_04",
+      "group": "Greet",
+      "target": "Abigail",
+      "text": "Everything alright?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_ABIGAIL_THIRD_FAREWELL_GENERAL_CONV_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_ABIGAIL_THIRD_FAREWELL_GENERAL_CONV_03",
+      "group": "Greet",
+      "target": "Abigail",
+      "text": "Anyway, all behind us now.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_BILL_SECOND_GENERAL_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_BILL_SECOND_GENERAL_CONV_01",
+      "group": "Greet",
+      "target": "Bill",
+      "text": "Keeping out of trouble there?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_BILL_SECOND_GENERAL_CONV_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_BILL_SECOND_GENERAL_CONV_02",
+      "group": "Greet",
+      "target": "Bill",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_BILL_SECOND_GENERAL_CONV_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_BILL_SECOND_GENERAL_CONV_04",
+      "group": "Greet",
+      "target": "Bill",
+      "text": "What you up to?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_BILL_SECOND_GENERAL_CONV_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_BILL_SECOND_GENERAL_CONV_06",
+      "group": "Greet",
+      "target": "Bill",
+      "text": "Managing not to annoy folks?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_SECOND_HOWS_IT_GOING_01",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_SECOND_HOWS_IT_GOING_01",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "How's it going?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_SECOND_HOWS_IT_GOING_02",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_SECOND_HOWS_IT_GOING_02",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "How are you doing?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_SECOND_HOWS_IT_GOING_03",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_SECOND_HOWS_IT_GOING_03",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_SECOND_HOWS_IT_GOING_04",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_SECOND_HOWS_IT_GOING_04",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "How are things?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_SECOND_HOWS_IT_GOING_05",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_SECOND_HOWS_IT_GOING_05",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "How are you?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_SECOND_HOWS_IT_GOING_06",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_SECOND_HOWS_IT_GOING_06",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "How's it all going?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_THIRD_BADLY_RESPONSE_01",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_THIRD_BADLY_RESPONSE_01",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Keep your chin up.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_THIRD_BADLY_RESPONSE_02",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_THIRD_BADLY_RESPONSE_02",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "It'll be alright.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_THIRD_BADLY_RESPONSE_03",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_THIRD_BADLY_RESPONSE_03",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "You'll be okay.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_THIRD_BADLY_RESPONSE_05",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_THIRD_BADLY_RESPONSE_05",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Just hang in there.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_THIRD_BADLY_RESPONSE_06",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_THIRD_BADLY_RESPONSE_06",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "You'll be alright.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_THIRD_NEUTRAL_RESPONSE_01",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_THIRD_NEUTRAL_RESPONSE_01",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_01:CAMP_GREET_THIRD_NEUTRAL_RESPONSE_03",
+      "voice": "ARTHUR_NORMAL_01",
+      "name": "CAMP_GREET_THIRD_NEUTRAL_RESPONSE_03",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_01",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_02",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Hey.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_03",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Howdy.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_04",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_05",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Arthur.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_06",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_07",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_07",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_08",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_08",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Howdy.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_09",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_09",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_10",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_10",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Hey.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_11",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_11",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Hey.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_12",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_12",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_13",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_13",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_14",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_14",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Arthur.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_15",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_15",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Hey.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_16",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_16",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_17",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_17",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "Hey.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_GENERAL_18",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_GENERAL_18",
+      "group": "Greet",
+      "target": "Camp · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_CHARLES_SECOND_GENERAL_CONV_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_CHARLES_SECOND_GENERAL_CONV_03",
+      "group": "Greet",
+      "target": "Charles",
+      "text": "You good there?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_CHARLES_SECOND_GENERAL_CONV_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_CHARLES_SECOND_GENERAL_CONV_04",
+      "group": "Greet",
+      "target": "Charles",
+      "text": "You going out hunting again soon?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_CHARLES_SECOND_GENERAL_CONV_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_CHARLES_SECOND_GENERAL_CONV_05",
+      "group": "Greet",
+      "target": "Charles",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_HOSEA_SECOND_GENERAL_CONV_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_HOSEA_SECOND_GENERAL_CONV_01",
+      "group": "Greet",
+      "target": "Hosea",
+      "text": "How did we end up over this way?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_HOSEA_SECOND_GENERAL_CONV_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_HOSEA_SECOND_GENERAL_CONV_02",
+      "group": "Greet",
+      "target": "Hosea",
+      "text": "You're looking good.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_HOSEA_SECOND_GENERAL_CONV_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_HOSEA_SECOND_GENERAL_CONV_03",
+      "group": "Greet",
+      "target": "Hosea",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_HOSEA_SECOND_GENERAL_CONV_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_HOSEA_SECOND_GENERAL_CONV_04",
+      "group": "Greet",
+      "target": "Hosea",
+      "text": "What's going on?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_HOSEA_SECOND_GENERAL_CONV_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_HOSEA_SECOND_GENERAL_CONV_05",
+      "group": "Greet",
+      "target": "Hosea",
+      "text": "Anything I need to know about?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_HOSEA_SECOND_GENERAL_CONV_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_HOSEA_SECOND_GENERAL_CONV_06",
+      "group": "Greet",
+      "target": "Hosea",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JACK_SECOND_GENERAL_CONV_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JACK_SECOND_GENERAL_CONV_02",
+      "group": "Greet",
+      "target": "Jack",
+      "text": "Look, everything's going to be alright.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_JACK_SECOND_GENERAL_CONV_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_JACK_SECOND_GENERAL_CONV_05",
+      "group": "Greet",
+      "target": "Jack",
+      "text": "You okay?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_KIERAN_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_KIERAN_01",
+      "group": "Greet",
+      "target": "Kieran",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_KIERAN_SECOND_GENERAL_CONV_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_KIERAN_SECOND_GENERAL_CONV_06",
+      "group": "Greet",
+      "target": "Kieran",
+      "text": "What you up to?",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_FEMALE_09",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_FEMALE_09",
+      "group": "Greet",
+      "target": "Stranger · female",
+      "text": "Hey.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_EVENING_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_EVENING_02",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Good evening.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_EVENING_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_EVENING_03",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Evening to you.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_EVENING_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_EVENING_04",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Have a good night.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_EVENING_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_EVENING_06",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Good evening.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_EVENING_08",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_EVENING_08",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Have a nice evening.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_01",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Morning.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_02",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Good morning.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_03",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Morning to you.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_05",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Morning.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_06",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Morning.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_07",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_07",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Morning.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_08",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_08",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Morning to you.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_09",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_09",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MORNING_10",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MORNING_10",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Good day.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_SECOND_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_SECOND_04",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "You have yourself a fine day.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_SECOND_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_SECOND_06",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Hello, hello, hello.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_SECOND_07",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_SECOND_07",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Hello, now.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_THIRD_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_THIRD_02",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_THIRD_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_THIRD_03",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Hello it is.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_THIRD_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_THIRD_05",
+      "group": "Greet",
+      "target": "Stranger · general",
+      "text": "Yep.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_01",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_01",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_02",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_02",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_03",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_03",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_04",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_04",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "Hello, mister.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_05",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_05",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_06",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_06",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_07",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_07",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "Howdy, mister.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_08",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_08",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_09",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_09",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "Hello, mister.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_10",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_10",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "Hello, sir.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_11",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_11",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_12",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_12",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_13",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_13",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_14",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_14",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "Hey.",
+      "enabled": true
+    },
+    {
+      "id": "ARTHUR_NORMAL_02:GREET_MALE_15",
+      "voice": "ARTHUR_NORMAL_02",
+      "name": "GREET_MALE_15",
+      "group": "Greet",
+      "target": "Stranger · male",
+      "text": "Partner.",
+      "enabled": true
+    }
+  ]
+}

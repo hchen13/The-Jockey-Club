@@ -1,0 +1,5 @@
+/build/
+/branding/trailer/media/
+__pycache__/
+*.py[cod]
+node_modules/
